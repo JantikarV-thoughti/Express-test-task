@@ -1,6 +1,5 @@
-const app = require("./index")
+const { app, PORT } = require("./index");
 
-
-app.listen(8989, () => {
-    console.log("Listening on port 8989")
-})
+app.listen(PORT, () => {
+  console.log("Listening on port 8989");
+});
