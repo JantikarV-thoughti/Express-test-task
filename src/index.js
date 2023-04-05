@@ -3,6 +3,7 @@ const dotenv = require('dotenv')
 const testController = require("./controllers/test.controller")
 const authController = require("./controllers/auth.controller")
 const userController = require("./controllers/user.controller")
+const postController = require("./controllers/post.contoller")
 
 const PORT = process.env.PORT || 8989
 
@@ -13,5 +14,6 @@ app.use(express.json())
 app.use("/test", testController)
 app.use("/api/auth", authController)
 app.use("/api/users", userController)
+app.use("/api/posts", postController)
 
 module.exports = {app, PORT}
