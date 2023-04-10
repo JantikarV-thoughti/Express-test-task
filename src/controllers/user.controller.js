@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const users = await User.find();
 
     if (users.length === 0) {
-      ApiHelper.generateApiResponse(res, req, "No users", 200);
+      ApiHelper.generateApiResponse(res, req, "No users found", 404);
       return;
     }
 
