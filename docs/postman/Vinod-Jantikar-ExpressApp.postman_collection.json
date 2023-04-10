@@ -962,10 +962,40 @@
 					},
 					"response": [
 						{
-							"name": "002-Create-new-Post",
+							"name": "002-Create-new-Post-Success",
 							"originalRequest": {
 								"method": "GET",
 								"header": []
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "002-Create-new-Post-Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Poster 1\",\r\n    \"description\": \"Where are you from\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"6431126cb5ce97e5eaf86cc3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/posts",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"posts"
+									]
+								}
 							},
 							"_postman_previewlanguage": null,
 							"header": null,
@@ -1131,6 +1161,37 @@
 										}
 									]
 								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "005-Get-post-by-id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "005-Get-post-by-id-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "005-Get-post-by-id-error",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
 							},
 							"_postman_previewlanguage": null,
 							"header": null,

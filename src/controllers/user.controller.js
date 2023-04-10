@@ -28,6 +28,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+
+    if (user === null) {
+      ApiHelper.generateApiResponse(res, req, "User not found", 400);
+      return;
+    }
+
     ApiHelper.generateApiResponse(res, req, "User found", 200, user);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Invalid user id", 404);
@@ -39,17 +45,17 @@ router.post("/", async (req, res) => {
     const { error, value } = validateUser(req.body);
 
     if (error) {
-      console.log(error);
-      return res.send(error.details);
+      ApiHelper.generateApiResponse(res, req, error.message, 400);
+      return;
     }
 
-    const { email } = value;
+    const { email, username } = value;
 
     const existingEmail = await User.findOne({ email });
+    const existingUsername = await User.findOne({ username });
 
-    if (existingEmail) {
-      //  return res.status(500).send("User already exist")
-      ApiHelper.generateApiResponse(res, req, "User already exist", 500);
+    if (existingEmail || existingUsername) {
+      ApiHelper.generateApiResponse(res, req, "User already exist", 409);
       return;
     }
 
@@ -68,6 +74,27 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
+    const existingEmail = await User.findOne({ email: req.body.email });
+    const existingUsername = await User.findOne({
+      username: req.body.username,
+    });
+
+    if (!user) {
+      ApiHelper.generateApiResponse(res, req, "User not found", 400);
+      return;
+    }
+
+    if (existingEmail || existingUsername) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "email or username already exists.",
+        400
+      );
+      return;
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
@@ -78,16 +105,37 @@ router.put("/:id", async (req, res) => {
       res,
       req,
       "User updated successfully",
-      201,
+      200,
       updatedUser
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Invalid user id", 400);
+    ApiHelper.generateApiResponse(res, req, "Invalid user id", 500);
   }
 });
 
 router.patch("/:id", async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
+    const existingEmail = await User.findOne({ email: req.body.email });
+    const existingUsername = await User.findOne({
+      username: req.body.username,
+    });
+
+    if (!user) {
+      ApiHelper.generateApiResponse(res, req, "User not found", 400);
+      return;
+    }
+
+    if (existingEmail || existingUsername) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "email or username already exists.",
+        400
+      );
+      return;
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
@@ -98,16 +146,23 @@ router.patch("/:id", async (req, res) => {
       res,
       req,
       "User updated successfully",
-      201,
+      200,
       updatedUser
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Invalid user id", 400);
+    ApiHelper.generateApiResponse(res, req, "Invalid user id", 500);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      ApiHelper.generateApiResponse(res, req, "User not found", 400);
+      return;
+    }
+
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     ApiHelper.generateApiResponse(
       res,

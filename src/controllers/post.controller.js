@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const Post = require("../models/post.model.js");
+const { Post, validatePost } = require("../models/post.model.js");
 const ApiHelper = require("../utils/api.helper");
 
 router.get("/", async (req, res) => {
@@ -27,6 +27,12 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      return;
+    }
+
     ApiHelper.generateApiResponse(res, req, "Post found", 200, post);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Post not found", 500);
@@ -35,7 +41,15 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    const { error } = validatePost(req.body);
+
+    if (error) {
+      ApiHelper.generateApiResponse(res, req, error.message, 400);
+      return;
+    }
+
     const post = await Post.create(req.body);
+
     ApiHelper.generateApiResponse(
       res,
       req,
@@ -56,6 +70,13 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      return;
+    }
+
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -68,12 +89,19 @@ router.put("/:id", async (req, res) => {
       updatedPost
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Could not update post", 500);
+    ApiHelper.generateApiResponse(res, req, "Invalid post Id", 500);
   }
 });
 
 router.delete("/:id", async (req, res) => {
   try {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      return;
+    }
+
     const deletedPost = await Post.findByIdAndDelete(req.params.id);
     ApiHelper.generateApiResponse(
       res,

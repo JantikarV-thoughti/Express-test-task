@@ -2,19 +2,21 @@ const mongoose = require("mongoose");
 const Joigoose = require("joigoose")(mongoose);
 
 const Joi = require("joi");
+const validator = require("../validator/schema.validator");
 
 const joiUserSchema = Joi.object({
-  id: Joi.number().required(),
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
-  email: Joi.string().email().required(),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net", "org"] },
+    })
+    .required(),
   username: Joi.string().required(),
   password: Joi.string().min(3).max(8).required(),
   status: Joi.boolean().required(),
 });
-
-const validator = (schema) => (payload) =>
-  schema.validate(payload, { abortEarly: true });
 
 const mongooseUserSchema = new mongoose.Schema(Joigoose.convert(joiUserSchema));
 
