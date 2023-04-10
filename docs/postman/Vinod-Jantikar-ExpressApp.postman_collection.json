@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "d381e6c3-69d5-4a85-8ba3-59f52bb22849",
+		"_postman_id": "27d01f70-01cb-457c-9469-46ac5290ecfc",
 		"name": "Vinod-Jantikar-ExpressApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -796,7 +796,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"Cast to ObjectId failed for value \\\"642e661b53dba87eafbba0511\\\" (type string) at path \\\"_id\\\" for model \\\"user\\\"\"\n}"
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Invalid user id\",\n    \"error\": \"Invalid user id\",\n    \"result\": []\n}"
 						},
 						{
 							"name": "006-Delete-User-Success-Response",
@@ -932,6 +932,210 @@
 							],
 							"cookie": [],
 							"body": "[\n    {\n        \"_id\": \"642e83c22138f6f67a4c2363\",\n        \"title\": \"Post 2\",\n        \"description\": \"Hello Post 2\",\n        \"user_id\": {\n            \"_id\": \"642e667053dba87eafbba055\",\n            \"firstName\": \"Prateek\",\n            \"lastName\": \"Shukla\",\n            \"createdAt\": \"2023-04-06T06:28:00.489Z\",\n            \"updatedAt\": \"2023-04-06T06:28:00.489Z\"\n        },\n        \"createdAt\": \"2023-04-06T08:33:06.422Z\",\n        \"updatedAt\": \"2023-04-06T08:33:06.422Z\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "002-Create-new-Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Poster 1\",\r\n    \"description\": \"Where are you from\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"6431126cb5ce97e5eaf86cc3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_PATH}}/api/posts",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "002-Create-new-Post",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "003-Update-post",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Hi I'm updated post\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_PATH}}/api/posts/:post_id",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "6431126cb5ce97e5eaf86cc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update-post-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": []
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Update-post-failure",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"Hi I'm updated post\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/posts/:post_id",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										":post_id"
+									],
+									"variable": [
+										{
+											"key": "post_id",
+											"value": "6431126cb5ce97e5eaf86cc3"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "004-Delete-post-By-Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_PATH}}/api/posts/:post_id",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"posts",
+								":post_id"
+							],
+							"variable": [
+								{
+									"key": "post_id",
+									"value": "6431126cb5ce97e5eaf86cc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete-post-By-Id-Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_PATH}}/api/posts/:post_id",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										":post_id"
+									],
+									"variable": [
+										{
+											"key": "post_id",
+											"value": "6431126cb5ce97e5eaf86cc3"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Delete-post-By-Id-Error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_PATH}}/api/posts/:post_id",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"posts",
+										":post_id"
+									],
+									"variable": [
+										{
+											"key": "post_id",
+											"value": "6431126cb5ce97e5eaf86cc3"
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
 						}
 					]
 				}
