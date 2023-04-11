@@ -3,8 +3,9 @@ const router = express.Router();
 
 const { Post, validatePost } = require("../models/post.model.js");
 const ApiHelper = require("../utils/api.helper");
+const authenticate = require("../middlewares/authenticate.middleware.js")
 
-router.get("/", async (req, res) => {
+router.get("/", authenticate, async (req, res) => {
   try {
     const posts = await Post.find().populate("user_id");
     if (posts.length === 0) {
