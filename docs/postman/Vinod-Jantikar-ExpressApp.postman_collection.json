@@ -1,1233 +1,1381 @@
 {
-	"info": {
-		"_postman_id": "27d01f70-01cb-457c-9469-46ac5290ecfc",
-		"name": "Vinod-Jantikar-ExpressApp",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-	},
-	"item": [
-		{
-			"name": "Users",
-			"item": [
-				{
-					"name": "001-Get-All-Users",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "001-Get-All-Users-Success-Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "466"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"1d2-tqWkG5KRSJ0o7/8bu7eUkHej0kM\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:18:53 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"_id\": \"642e661b53dba87eafbba051\",\n        \"firstName\": \"Vinod\",\n        \"lastName\": \"Jantikar\",\n        \"createdAt\": \"2023-04-06T06:26:35.351Z\",\n        \"updatedAt\": \"2023-04-06T06:26:35.351Z\"\n    },\n    {\n        \"_id\": \"642e666353dba87eafbba053\",\n        \"firstName\": \"Chandra\",\n        \"lastName\": \"Shukla\",\n        \"createdAt\": \"2023-04-06T06:27:47.122Z\",\n        \"updatedAt\": \"2023-04-06T06:52:27.525Z\"\n    },\n    {\n        \"_id\": \"642e667053dba87eafbba055\",\n        \"firstName\": \"Prateek\",\n        \"lastName\": \"Shukla\",\n        \"createdAt\": \"2023-04-06T06:28:00.489Z\",\n        \"updatedAt\": \"2023-04-06T06:28:00.489Z\"\n    }\n]"
-						}
-					]
-				},
-				{
-					"name": "002-Get-User-By-Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users/:user_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "642e661b53dba87eafbba051"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "002-Get-User-By-Id-Success-Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba051"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "154"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"9a-7w7HJmiyq2BtHCoXWt+p2+HZTjc\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:20:55 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"_id\": \"642e661b53dba87eafbba051\",\n    \"firstName\": \"Vinod\",\n    \"lastName\": \"Jantikar\",\n    \"createdAt\": \"2023-04-06T06:26:35.351Z\",\n    \"updatedAt\": \"2023-04-06T06:26:35.351Z\"\n}"
-						},
-						{
-							"name": "002-Get-User-By-Id-Error-Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba0511"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "126"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"7e-wwyrzcVI/ZyGaGDghoMn5UIC0Y4\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:21:19 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Cast to ObjectId failed for value \\\"642e661b53dba87eafbba0511\\\" (type string) at path \\\"_id\\\" for model \\\"user\\\"\"\n}"
-						}
-					]
-				},
-				{
-					"name": "003-Create-New-User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"User\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "003-Create-New-User-Success-Response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users"
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "149"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"95-HOKchmkIUqwY40aUYIgCOaiig+I\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:24:37 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"_id\": \"642f9b051c50443ac4985717\",\n    \"createdAt\": \"2023-04-07T04:24:37.526Z\",\n    \"updatedAt\": \"2023-04-07T04:24:37.526Z\"\n}"
-						},
-						{
-							"name": "003-Create-New-User-Error-Response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName1\": \"Test\",\r\n    \"lastName1\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users"
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "118"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"76-QzlfYTWsJpuxQ5rlxSkh/ZSACXE\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:24:56 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"user validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required.\"\n}"
-						}
-					]
-				},
-				{
-					"name": "004-Update-User",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users/:user_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "642e661b53dba87eafbba051"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "004-Update-User-Success-Response",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba051"
-										}
-									]
-								}
-							},
-							"status": "Created",
-							"code": 201,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "150"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"96-btKi48SoEK/SZMlkdm9rQEzHVJg\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:28:16 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"_id\": \"642e661b53dba87eafbba051\",\n    \"firstName\": \"Vinod\",\n    \"lastName\": \"User\",\n    \"createdAt\": \"2023-04-06T06:26:35.351Z\",\n    \"updatedAt\": \"2023-04-07T04:28:16.119Z\"\n}"
-						},
-						{
-							"name": "004-Update-User-Error-Response",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba0511"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "137"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"89-QhivkL6qlNtqcod15zVxQdKA6+0\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:28:51 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Cast to ObjectId failed for value \\\"{ _id: '642e661b53dba87eafbba0511' }\\\" (type Object) at path \\\"_id\\\" for model \\\"user\\\"\"\n}"
-						}
-					]
-				},
-				{
-					"name": "005-Update-User",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users/:user_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "642e661b53dba87eafbba051"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "005-Update-User-Success-Response",
-							"originalRequest": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba051"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "150"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"96-3H8YrlCdRFmTx5E+jYQrFEbnlfY\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:31:05 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"_id\": \"642e661b53dba87eafbba051\",\n    \"firstName\": \"Vinod\",\n    \"lastName\": \"User\",\n    \"createdAt\": \"2023-04-06T06:26:35.351Z\",\n    \"updatedAt\": \"2023-04-07T04:31:04.934Z\"\n}"
-						},
-						{
-							"name": "005-Update-User-Error-Response",
-							"originalRequest": {
-								"method": "PATCH",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba0511"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "137"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"89-QhivkL6qlNtqcod15zVxQdKA6+0\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:31:24 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Cast to ObjectId failed for value \\\"{ _id: '642e661b53dba87eafbba0511' }\\\" (type Object) at path \\\"_id\\\" for model \\\"user\\\"\"\n}"
-						}
-					]
-				},
-				{
-					"name": "006-Delete-User",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/users/:user_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"users",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": "642f9b261c50443ac498571a"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "006-Delete-User-Error-Response",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642e661b53dba87eafbba0511"
-										}
-									]
-								}
-							},
-							"status": "Internal Server Error",
-							"code": 500,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "126"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"7e-wwyrzcVI/ZyGaGDghoMn5UIC0Y4\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:32:32 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Invalid user id\",\n    \"error\": \"Invalid user id\",\n    \"result\": []\n}"
-						},
-						{
-							"name": "006-Delete-User-Success-Response",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/users/:user_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"users",
-										":user_id"
-									],
-									"variable": [
-										{
-											"key": "user_id",
-											"value": "642f9b261c50443ac498571a"
-										}
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "149"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"95-AAhjg6uZQyu2u6Ifm8g3vKIa/PU\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:32:58 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"_id\": \"642f9b261c50443ac498571a\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"createdAt\": \"2023-04-07T04:25:10.111Z\",\n    \"updatedAt\": \"2023-04-07T04:25:10.111Z\"\n}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "Posts",
-			"item": [
-				{
-					"name": "001-Get-All-Posts",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/posts",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "001-Get-All-Posts-Sample-Response",
-							"originalRequest": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/posts",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"posts"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "325"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"145-+M4JK5pjEd2yild58PiPm2axsnE\""
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:43:53 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "[\n    {\n        \"_id\": \"642e83c22138f6f67a4c2363\",\n        \"title\": \"Post 2\",\n        \"description\": \"Hello Post 2\",\n        \"user_id\": {\n            \"_id\": \"642e667053dba87eafbba055\",\n            \"firstName\": \"Prateek\",\n            \"lastName\": \"Shukla\",\n            \"createdAt\": \"2023-04-06T06:28:00.489Z\",\n            \"updatedAt\": \"2023-04-06T06:28:00.489Z\"\n        },\n        \"createdAt\": \"2023-04-06T08:33:06.422Z\",\n        \"updatedAt\": \"2023-04-06T08:33:06.422Z\"\n    }\n]"
-						}
-					]
-				},
-				{
-					"name": "002-Create-new-Post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Poster 1\",\r\n    \"description\": \"Where are you from\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"6431126cb5ce97e5eaf86cc3\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/posts",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"posts"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "002-Create-new-Post-Success",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "002-Create-new-Post-Error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Poster 1\",\r\n    \"description\": \"Where are you from\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"6431126cb5ce97e5eaf86cc3\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/posts",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"posts"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				},
-				{
-					"name": "003-Update-post",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Hi I'm updated post\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/posts/:post_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								":post_id"
-							],
-							"variable": [
-								{
-									"key": "post_id",
-									"value": "6431126cb5ce97e5eaf86cc"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Update-post-success",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "Update-post-failure",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"title\": \"Hi I'm updated post\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/posts/:post_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"posts",
-										":post_id"
-									],
-									"variable": [
-										{
-											"key": "post_id",
-											"value": "6431126cb5ce97e5eaf86cc3"
-										}
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				},
-				{
-					"name": "004-Delete-post-By-Id",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/posts/:post_id",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"posts",
-								":post_id"
-							],
-							"variable": [
-								{
-									"key": "post_id",
-									"value": "6431126cb5ce97e5eaf86cc"
-								}
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Delete-post-By-Id-Success",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/posts/:post_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"posts",
-										":post_id"
-									],
-									"variable": [
-										{
-											"key": "post_id",
-											"value": "6431126cb5ce97e5eaf86cc3"
-										}
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "Delete-post-By-Id-Error",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/posts/:post_id",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"posts",
-										":post_id"
-									],
-									"variable": [
-										{
-											"key": "post_id",
-											"value": "6431126cb5ce97e5eaf86cc3"
-										}
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				},
-				{
-					"name": "005-Get-post-by-id",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": [
-						{
-							"name": "005-Get-post-by-id-success",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "005-Get-post-by-id-error",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						}
-					]
-				}
-			]
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		},
-		{
-			"listen": "test",
-			"script": {
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
-		}
-	],
-	"variable": [
-		{
-			"key": "BASE_PATH",
-			"value": "http://localhost:8989",
-			"type": "default"
-		}
-	]
+  "info": {
+    "_postman_id": "27d01f70-01cb-457c-9469-46ac5290ecfc",
+    "name": "Vinod-Jantikar-ExpressApp",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "001-Get-All-Users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "response": [
+            {
+              "name": "001-Get-All-Users-Success-Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "466"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d2-tqWkG5KRSJ0o7/8bu7eUkHej0kM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:18:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"Users fetched successfully\",\n    \"error\": \"\",\n    \"result\": [\n        {\n            \"_id\": \"64369672d12cda66cf2461cf\",\n            \"first_name\": \"Ricky\",\n            \"last_name\": \"Ponting\",\n            \"email\": \"ricky@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"username\": \"Ricky Pointing\",\n            \"user_type\": \"user\",\n            \"password\": \"$2b$10$m48rQiASRjm8wFDyaVMuOuL2yRTJluB.aiPDPBUGwPmeRO4PV5GQy\",\n            \"status\": \"inactive\",\n            \"tokens\": [],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"643696e9d12cda66cf2461d2\",\n            \"first_name\": \"Ravindra\",\n            \"last_name\": \"Jadeja\",\n            \"email\": \"jadeja@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"username\": \"Ravindra Jadeja\",\n            \"user_type\": \"user\",\n            \"password\": \"$2b$10$HI0TFM3jQQ9ywMfGRdilyurNFQOhwK59.vvSQHMcTCx5P6gMdc79m\",\n            \"status\": \"active\",\n            \"tokens\": [\n                {\n                    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMjk5MzY0LCJleHAiOjE2ODEzMDAyNjR9.SD5ZntXXtTCNYnpdvCTSxv9wzaNBnCdFlAtWy4U60Us\",\n                    \"signedAt\": \"1681299364749\"\n                }\n            ],\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"64369736d12cda66cf2461d5\",\n            \"first_name\": \"Suresh\",\n            \"last_name\": \"Raina\",\n            \"email\": \"raina@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"username\": \"Suresh Raina\",\n            \"user_type\": \"user\",\n            \"password\": \"$2b$10$HR2UaeHOCimBzwubPFmKTuGEwPvCiYODGGEEymQOWaj/OS1YgmgIK\",\n            \"status\": \"active\",\n            \"tokens\": [],\n            \"__v\": 0\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "002-Get-User-By-Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users/:user_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users", ":user_id"],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "64369672d12cda66cf2461cf"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "002-Get-User-By-Id-Success-Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "642e661b53dba87eafbba051"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "154"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"9a-7w7HJmiyq2BtHCoXWt+p2+HZTjc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:20:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User found\",\n    \"error\": \"\",\n    \"result\": {\n        \"_id\": \"64369672d12cda66cf2461cf\",\n        \"first_name\": \"Ricky\",\n        \"last_name\": \"Ponting\",\n        \"email\": \"ricky@gmail.com\",\n        \"mobile\": \"1234567890\",\n        \"username\": \"Ricky Pointing\",\n        \"user_type\": \"user\",\n        \"password\": \"$2b$10$m48rQiASRjm8wFDyaVMuOuL2yRTJluB.aiPDPBUGwPmeRO4PV5GQy\",\n        \"status\": \"inactive\",\n        \"tokens\": [],\n        \"__v\": 0\n    }\n}"
+            },
+            {
+              "name": "002-Get-User-By-Id-Error-Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "642e661b53dba87eafbba0511"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "126"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"7e-wwyrzcVI/ZyGaGDghoMn5UIC0Y4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:21:19 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User not found\",\n    \"error\": \"User not found\",\n    \"result\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "003-Create-New-User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"first_name\": \"Rohit\",\r\n \"last_name\": \"Sharma\",\r\n \"email\": \"sharma@gmail.com\",\r\n \"mobile\": \"9876543217\",\r\n \"username\": \"Hitman\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users"]
+            }
+          },
+          "response": [
+            {
+              "name": "003-Create-New-User-Success-Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Test\",\r\n    \"lastName\": \"User\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "149"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"95-HOKchmkIUqwY40aUYIgCOaiig+I\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:24:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User created successfully\",\n    \"error\": \"\",\n    \"result\": {\n        \"first_name\": \"Rohit\",\n        \"last_name\": \"Sharma\",\n        \"email\": \"sharma@gmail.com\",\n        \"mobile\": \"9876543217\",\n        \"username\": \"Hitman\",\n        \"user_type\": \"user\",\n        \"password\": \"$2b$10$lIV8ixxAd/F1Brol4Qx8eeKW0mcM7h/XEvkJNbnNQqA.2af1Xed8u\",\n        \"status\": \"active\",\n        \"tokens\": [],\n        \"_id\": \"643698d0a2bd242853c1d45f\",\n        \"__v\": 0\n    }\n}"
+            },
+            {
+              "name": "003-Create-New-User-Error-Response",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName1\": \"Test\",\r\n    \"lastName1\": \"User\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users"]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "118"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"76-QzlfYTWsJpuxQ5rlxSkh/ZSACXE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:24:56 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"\\\"last_name\\\" is not allowed to be empty\",\n    \"error\": \"\\\"last_name\\\" is not allowed to be empty\",\n    \"result\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "004-Update-User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n\"first_name\": \"Shane\",\r\n\"last_name\": \"Warne\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users/:user_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users", ":user_id"],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "64369672d12cda66cf2461cf"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "004-Update-User-Success-Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\"firstName\": \"Vinod\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "6430275bf5dc55d7b89d7f7d"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "150"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"96-btKi48SoEK/SZMlkdm9rQEzHVJg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:28:16 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User updated successfully\",\n    \"error\": \"\",\n    \"result\": {\n        \"_id\": \"64369672d12cda66cf2461cf\",\n        \"first_name\": \"Shane\",\n        \"last_name\": \"Warne\",\n        \"email\": \"ricky@gmail.com\",\n        \"mobile\": \"1234567890\",\n        \"username\": \"Ricky Pointing\",\n        \"user_type\": \"user\",\n        \"password\": \"$2b$10$m48rQiASRjm8wFDyaVMuOuL2yRTJluB.aiPDPBUGwPmeRO4PV5GQy\",\n        \"status\": \"inactive\",\n        \"tokens\": [],\n        \"__v\": 0\n    }\n}"
+            },
+            {
+              "name": "004-Update-User-Error-Response",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "64369672d12cda66cf2461c5"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "137"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"89-QhivkL6qlNtqcod15zVxQdKA6+0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:28:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User not found\",\n    \"error\": \"User not found\",\n    \"result\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "005-Update-User",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"shane@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users/:user_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users", ":user_id"],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "64369672d12cda66cf2461cf"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "005-Update-User-Success-Response",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "642e661b53dba87eafbba051"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "150"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"96-3H8YrlCdRFmTx5E+jYQrFEbnlfY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:31:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User updated successfully\",\n    \"error\": \"\",\n    \"result\": {\n        \"_id\": \"64369672d12cda66cf2461cf\",\n        \"first_name\": \"Shane\",\n        \"last_name\": \"Warne\",\n        \"email\": \"shane@gmail.com\",\n        \"mobile\": \"1234567890\",\n        \"username\": \"Ricky Pointing\",\n        \"user_type\": \"user\",\n        \"password\": \"$2b$10$m48rQiASRjm8wFDyaVMuOuL2yRTJluB.aiPDPBUGwPmeRO4PV5GQy\",\n        \"status\": \"inactive\",\n        \"tokens\": [],\n        \"__v\": 0\n    }\n}"
+            },
+            {
+              "name": "005-Update-User-Error-Response",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Vinod\",\r\n    \"lastName\": \"User\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "64369672d12cda66cf2461c6"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "137"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"89-QhivkL6qlNtqcod15zVxQdKA6+0\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:31:24 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User not found\",\n    \"error\": \"User not found\",\n    \"result\": []\n}"
+            }
+          ]
+        },
+        {
+          "name": "006-Delete-User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/users/:user_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "users", ":user_id"],
+              "variable": [
+                {
+                  "key": "user_id",
+                  "value": "64369672d12cda66cf2461cf"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "006-Delete-User-Error-Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "642e661b53dba87eafbba0511"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "126"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"7e-wwyrzcVI/ZyGaGDghoMn5UIC0Y4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:32:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User not found\",\n    \"error\": \"User not found\",\n    \"result\": []\n}"
+            },
+            {
+              "name": "006-Delete-User-Success-Response",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/users/:user_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "users", ":user_id"],
+                  "variable": [
+                    {
+                      "key": "user_id",
+                      "value": "642f9b261c50443ac498571a"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "149"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"95-AAhjg6uZQyu2u6Ifm8g3vKIa/PU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:32:58 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"User deleted successfully\",\n    \"error\": \"\",\n    \"result\": {\n        \"_id\": \"64369672d12cda66cf2461cf\",\n        \"first_name\": \"Shane\",\n        \"last_name\": \"Warne\",\n        \"email\": \"shane@gmail.com\",\n        \"mobile\": \"1234567890\",\n        \"username\": \"Ricky Pointing\",\n        \"user_type\": \"user\",\n        \"password\": \"$2b$10$m48rQiASRjm8wFDyaVMuOuL2yRTJluB.aiPDPBUGwPmeRO4PV5GQy\",\n        \"status\": \"inactive\",\n        \"tokens\": [],\n        \"__v\": 0\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "001-Get-All-Posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/posts",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get-All-Posts-Response",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "325"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"145-+M4JK5pjEd2yild58PiPm2axsnE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Fri, 07 Apr 2023 04:43:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"requestToken\": null,\n    \"message\": \"Posts fetched successfully\",\n    \"error\": \"\",\n    \"result\": [\n        {\n            \"_id\": \"64369aa1a2bd242853c1d46e\",\n            \"title\": \"title one\",\n            \"description\": \"this is title one\",\n            \"is_published\": true,\n            \"status\": true,\n            \"user_id\": {\n                \"_id\": \"643696e9d12cda66cf2461d2\",\n                \"first_name\": \"Ravindra\",\n                \"last_name\": \"Jadeja\",\n                \"email\": \"jadeja@gmail.com\",\n                \"mobile\": \"1234567890\",\n                \"username\": \"Ravindra Jadeja\",\n                \"user_type\": \"user\",\n                \"password\": \"$2b$10$HI0TFM3jQQ9ywMfGRdilyurNFQOhwK59.vvSQHMcTCx5P6gMdc79m\",\n                \"status\": \"active\",\n                \"tokens\": [\n                    {\n                        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY\",\n                        \"signedAt\": \"1681300095748\"\n                    }\n                ],\n                \"__v\": 0\n            },\n            \"createdAt\": \"2023-04-12T11:48:49.117Z\",\n            \"updatedAt\": \"2023-04-12T11:48:49.117Z\"\n        },\n        {\n            \"_id\": \"64369ab8a2bd242853c1d471\",\n            \"title\": \"title two\",\n            \"description\": \"this is title two\",\n            \"is_published\": true,\n            \"status\": true,\n            \"user_id\": {\n                \"_id\": \"643696e9d12cda66cf2461d2\",\n                \"first_name\": \"Ravindra\",\n                \"last_name\": \"Jadeja\",\n                \"email\": \"jadeja@gmail.com\",\n                \"mobile\": \"1234567890\",\n                \"username\": \"Ravindra Jadeja\",\n                \"user_type\": \"user\",\n                \"password\": \"$2b$10$HI0TFM3jQQ9ywMfGRdilyurNFQOhwK59.vvSQHMcTCx5P6gMdc79m\",\n                \"status\": \"active\",\n                \"tokens\": [\n                    {\n                        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY\",\n                        \"signedAt\": \"1681300095748\"\n                    }\n                ],\n                \"__v\": 0\n            },\n            \"createdAt\": \"2023-04-12T11:49:12.775Z\",\n            \"updatedAt\": \"2023-04-12T11:49:12.775Z\"\n        },\n        {\n            \"_id\": \"64369ac5a2bd242853c1d474\",\n            \"title\": \"title three\",\n            \"description\": \"this is title three\",\n            \"is_published\": true,\n            \"status\": true,\n            \"user_id\": {\n                \"_id\": \"643696e9d12cda66cf2461d2\",\n                \"first_name\": \"Ravindra\",\n                \"last_name\": \"Jadeja\",\n                \"email\": \"jadeja@gmail.com\",\n                \"mobile\": \"1234567890\",\n                \"username\": \"Ravindra Jadeja\",\n                \"user_type\": \"user\",\n                \"password\": \"$2b$10$HI0TFM3jQQ9ywMfGRdilyurNFQOhwK59.vvSQHMcTCx5P6gMdc79m\",\n                \"status\": \"active\",\n                \"tokens\": [\n                    {\n                        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY\",\n                        \"signedAt\": \"1681300095748\"\n                    }\n                ],\n                \"__v\": 0\n            },\n            \"createdAt\": \"2023-04-12T11:49:25.044Z\",\n            \"updatedAt\": \"2023-04-12T11:49:25.044Z\"\n        }\n    ]\n}"
+            },
+            {
+              "name": "Get-All-Posts-Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"The token is not valid\",\r\n    \"error\": \"The token is not valid\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "005-Get-post-by-id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/posts/:post_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "posts", ":post_id"],
+              "variable": [
+                {
+                  "key": "post_id",
+                  "value": "64369ab8a2bd242853c1d471"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "005-Get-post-by-id-Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post found\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"_id\": \"64369ab8a2bd242853c1d471\",\r\n        \"title\": \"title two\",\r\n        \"description\": \"this is title two\",\r\n        \"is_published\": true,\r\n        \"status\": true,\r\n        \"user_id\": \"643696e9d12cda66cf2461d2\",\r\n        \"createdAt\": \"2023-04-12T11:49:12.775Z\",\r\n        \"updatedAt\": \"2023-04-12T11:49:12.775Z\"\r\n    }\r\n}"
+            },
+            {
+              "name": "005-Get-post-by-id-Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post not found\",\r\n    \"error\": \"Post not found\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "002-Create-new-Post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"title three\",\r\n    \"description\": \"this is title three\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"643696e9d12cda66cf2461d2\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/posts",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "posts"]
+            }
+          },
+          "response": [
+            {
+              "name": "002-Create-new-Post-Succes",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post created successfully\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"title\": \"title two\",\r\n        \"description\": \"this is title two\",\r\n        \"is_published\": true,\r\n        \"status\": true,\r\n        \"user_id\": \"6433f1bc5de5446828c44344\",\r\n        \"_id\": \"643417dbab79e3aaa9d55d43\",\r\n        \"createdAt\": \"2023-04-10T14:06:19.821Z\",\r\n        \"updatedAt\": \"2023-04-10T14:06:19.821Z\"\r\n    }\r\n}"
+            },
+            {
+              "name": "002-Create-new-Post-Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Poster 1\",\r\n    \"description\": \"Where are you from\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"6431126cb5ce97e5eaf86cc3\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"\\\"title\\\" is not allowed to be empty\",\r\n    \"error\": \"\\\"title\\\" is not allowed to be empty\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "003-Update-post",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"title\": \"Test post success\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/posts/:post_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "posts", ":post_id"],
+              "variable": [
+                {
+                  "key": "post_id",
+                  "value": "64369aa1a2bd242853c1d46e"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update-post-success",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post updated successfully\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"_id\": \"64369aa1a2bd242853c1d46e\",\r\n        \"title\": \"Test post success\",\r\n        \"description\": \"this is title one\",\r\n        \"is_published\": true,\r\n        \"status\": true,\r\n        \"user_id\": \"643696e9d12cda66cf2461d2\",\r\n        \"createdAt\": \"2023-04-12T11:48:49.117Z\",\r\n        \"updatedAt\": \"2023-04-12T11:53:39.522Z\"\r\n    }\r\n}"
+            },
+            {
+              "name": "Update-post-failure",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Hi I'm updated post\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts/:post_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts", ":post_id"],
+                  "variable": [
+                    {
+                      "key": "post_id",
+                      "value": "6431126cb5ce97e5eaf86cc"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post not found\",\r\n    \"error\": \"Post not found\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "004-Delete-post-By-Id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwMDk1LCJleHAiOjE2ODEzMDA5OTV9.foVxZwGqtlDGK8E3JBFAP6gHEdjG8_Xv6DQG8fmW7WY",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/posts/:post_id",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "posts", ":post_id"],
+              "variable": [
+                {
+                  "key": "post_id",
+                  "value": "64369aa1a2bd242853c1d460"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Delete-post-By-Id-Success",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts/:post_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts", ":post_id"],
+                  "variable": [
+                    {
+                      "key": "post_id",
+                      "value": "6431126cb5ce97e5eaf86cc3"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post has been successfully deleted\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"_id\": \"64369aa1a2bd242853c1d46e\",\r\n        \"title\": \"Test post success\",\r\n        \"description\": \"this is title one\",\r\n        \"is_published\": true,\r\n        \"status\": true,\r\n        \"user_id\": \"643696e9d12cda66cf2461d2\",\r\n        \"createdAt\": \"2023-04-12T11:48:49.117Z\",\r\n        \"updatedAt\": \"2023-04-12T11:53:39.522Z\"\r\n    }\r\n}"
+            },
+            {
+              "name": "Delete-post-By-Id-Error",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/posts/:post_id",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "posts", ":post_id"],
+                  "variable": [
+                    {
+                      "key": "post_id",
+                      "value": "6431126cb5ce97e5eaf86cc3"
+                    }
+                  ]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post not found\",\r\n    \"error\": \"Post not found\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "001-Register-new-user",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n \"first_name\": \"Suresh\",\r\n \"last_name\": \"Raina\",\r\n \"email\": \"raina@gmail.com\",\r\n \"mobile\": \"1234567890\",\r\n \"username\": \"Suresh Raina\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/auth/register",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "auth", "register"]
+            }
+          },
+          "response": [
+            {
+              "name": "Register-new-user-Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\"name\": \"Messi\",\r\n\"email\": \"messi@gmail.com\",\r\n\"mobile\": 5463214587,\r\n\"password\": \"12345\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/auth/register",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User registered successfully\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"first_name\": \"Ravindra\",\r\n        \"last_name\": \"Jadeja\",\r\n        \"email\": \"jadeja@gmail.com\",\r\n        \"mobile\": \"1234567890\",\r\n        \"username\": \"Ravindra Jadeja\",\r\n        \"user_type\": \"user\",\r\n        \"password\": \"$2b$10$HI0TFM3jQQ9ywMfGRdilyurNFQOhwK59.vvSQHMcTCx5P6gMdc79m\",\r\n        \"status\": \"active\",\r\n        \"tokens\": [],\r\n        \"_id\": \"643696e9d12cda66cf2461d2\",\r\n        \"__v\": 0\r\n    }\r\n}"
+            },
+            {
+              "name": "Register-new-user-Error-already-existing-error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\"name\": \"Pablo Pandey\",\r\n\"email\": \"pablo@gmail.com\",\r\n\"mobile\": 5862354783,\r\n\"password\": \"1234\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/auth/register",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "auth", "register"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User already exists\",\r\n    \"error\": \"User already exists\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "002-Login-user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI2MDUwLCJleHAiOjE2ODEyMjY5NTB9.IPAiNSVKpxnf1YuLs7jZNtQ5T824cL3f3CSi7D2wk-s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"jadeja@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_PATH}}/api/auth/login",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "Login-user-Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User logged in successfully.\",\r\n    \"error\": \"\",\r\n    \"result\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjZlOGE4NmVkMWM0YzUzYTYyN2M5IiwiaWF0IjoxNjgxMjg5MDEwLCJleHAiOjE2ODEyODk5MTB9.L1SthLs1wYrwg-9QQ99z6M_gaVb55wJt6-Gxcs7w21k\"\r\n}"
+            },
+            {
+              "name": "Login-user-Error",
+              "originalRequest": {
+                "method": "GET",
+                "header": []
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Invalid username or password\",\r\n    \"error\": \"Invalid username or password\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        },
+        {
+          "name": "003-Logout-user",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjk2ZTlkMTJjZGE2NmNmMjQ2MWQyIiwiaWF0IjoxNjgxMzAwODIwLCJleHAiOjE2ODEzMDE3MjB9.TRmnohuLUGrqruyfE_3SrL0OLWr_Aq-4uIp0bphxtL0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+                "key": "Authorization",
+                "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+                "type": "default"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_PATH}}/api/auth/logout",
+              "host": ["{{BASE_PATH}}"],
+              "path": ["api", "auth", "logout"]
+            }
+          },
+          "response": [
+            {
+              "name": "Logout-user-Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+                    "key": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+                    "type": "default"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/auth/logout",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "auth", "logout"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Logged out successfully\",\r\n    \"error\": \"\",\r\n    \"result\": []\r\n}"
+            },
+            {
+              "name": "Logout-user-Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+                    "key": "Authorization",
+                    "value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+                    "type": "default"
+                  }
+                ],
+                "url": {
+                  "raw": "{{BASE_PATH}}/api/auth/logout",
+                  "host": ["{{BASE_PATH}}"],
+                  "path": ["api", "auth", "logout"]
+                }
+              },
+              "_postman_previewlanguage": null,
+              "header": null,
+              "cookie": [],
+              "body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"The token is not valid\",\r\n    \"error\": \"The token is not valid\",\r\n    \"result\": []\r\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_PATH",
+      "value": "http://localhost:8989",
+      "type": "default"
+    }
+  ]
 }

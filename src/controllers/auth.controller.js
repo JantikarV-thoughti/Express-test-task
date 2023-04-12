@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
-const { Auth, validateAuth } = require("../models/auth.model");
+const { User, validateUser } = require("../models/user.model");
 const ApiHelper = require("../utils/api.helper");
 
 const authenticate = require("../middlewares/authenticate.middleware.js");
@@ -15,21 +15,21 @@ const newToken = (user) => {
 
 router.post("/register", async (req, res) => {
   try {
-    const { error } = validateAuth(req.body);
+    const { error } = validateUser(req.body);
 
     if (error) {
       ApiHelper.generateApiResponse(res, req, error.message, 400);
       return;
     }
 
-    const existingUser = await Auth.findOne({ email: req.body.email });
+    const existingUser = await User.findOne({ email: req.body.email });
 
     if (existingUser) {
       ApiHelper.generateApiResponse(res, req, "User already exists", 400);
       return;
     }
 
-    const user = await Auth.create(req.body);
+    const user = await User.create(req.body);
 
     ApiHelper.generateApiResponse(
       res,
@@ -45,7 +45,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const user = await Auth.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email });
 
     if (!user) {
       ApiHelper.generateApiResponse(
@@ -69,6 +69,16 @@ router.post("/login", async (req, res) => {
       return;
     }
 
+    if (user.status === "inactive") {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "User is not active, please register.",
+        401
+      );
+      return;
+    }
+
     const token = newToken(user);
 
     let oldTokens = user.tokens || [];
@@ -82,7 +92,7 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    await Auth.findByIdAndUpdate(user._id, {
+    await User.findByIdAndUpdate(user._id, {
       tokens: [{ token, signedAt: Date.now().toString() }],
     });
 
@@ -101,17 +111,26 @@ router.post("/login", async (req, res) => {
 router.post("/logout", authenticate, async (req, res) => {
   try {
     if (req.headers && req.headers.authorization) {
+      const token = req.headers?.authorization.split(" ")[1];
 
-      const token = req.headers?.authorization.split(" ")[1]
-
-      if(!token){
+      if (!token) {
         ApiHelper.generateApiResponse(res, req, "Authorization fail", 401);
-        return
+        return;
       }
 
+      const user = await User.findById(req.user.user_id);
+
+      const tokens = user.tokens;
+
+      const newToken = tokens.filter((item) => item.token !== token);
+
+      await User.findByIdAndUpdate(req.user.user_id, {
+        tokens: newToken,
+      });
+      ApiHelper.generateApiResponse(res, req, "Logged out successfully", 200);
     }
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
   }
 });
 
