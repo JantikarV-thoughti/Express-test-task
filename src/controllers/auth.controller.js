@@ -23,9 +23,12 @@ router.post("/register", async (req, res) => {
     }
 
     const existingUser = await User.findOne({ email: req.body.email });
+    const existingUsername = await User.findOne({
+      username: req.body.username,
+    });
 
-    if (existingUser) {
-      ApiHelper.generateApiResponse(res, req, "User already exists", 400);
+    if (existingUser || existingUsername) {
+      ApiHelper.generateApiResponse(res, req, "User already exists", 409);
       return;
     }
 
@@ -35,8 +38,7 @@ router.post("/register", async (req, res) => {
       res,
       req,
       "User registered successfully",
-      201,
-      user
+      201
     );
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
@@ -45,7 +47,9 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const user = await User.findOne({ email: req.body.email });
+    const user = await User.findOne({ email: req.body.email }).select(
+      "password"
+    );
 
     if (!user) {
       ApiHelper.generateApiResponse(
@@ -70,12 +74,7 @@ router.post("/login", async (req, res) => {
     }
 
     if (user.status === "inactive") {
-      ApiHelper.generateApiResponse(
-        res,
-        req,
-        "User is not active, please register.",
-        401
-      );
+      ApiHelper.generateApiResponse(res, req, "Inactive user; disabled", 401);
       return;
     }
 

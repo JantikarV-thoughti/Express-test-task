@@ -6,7 +6,7 @@ const ApiHelper = require("../utils/api.helper");
 
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select("-password").select("-tokens");
 
     if (users.length === 0) {
       ApiHelper.generateApiResponse(res, req, "No users found", 404);
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id, { password: 0, tokens: 0 });
 
     if (user === null) {
       ApiHelper.generateApiResponse(res, req, "User not found", 400);
@@ -60,13 +60,7 @@ router.post("/", async (req, res) => {
     }
 
     const user = await User.create(req.body);
-    ApiHelper.generateApiResponse(
-      res,
-      req,
-      "User created successfully",
-      201,
-      user
-    );
+    ApiHelper.generateApiResponse(res, req, "User created successfully", 201);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, error.message, 500);
   }
@@ -74,7 +68,7 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id, { password: 0, tokens: 0 });
     const existingEmail = await User.findOne({ email: req.body.email });
     const existingUsername = await User.findOne({
       username: req.body.username,
@@ -101,13 +95,7 @@ router.put("/:id", async (req, res) => {
       { new: true }
     );
 
-    ApiHelper.generateApiResponse(
-      res,
-      req,
-      "User updated successfully",
-      200,
-      updatedUser
-    );
+    ApiHelper.generateApiResponse(res, req, "User updated successfully", 200);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Invalid user id", 500);
   }
@@ -142,13 +130,7 @@ router.patch("/:id", async (req, res) => {
       { new: true }
     );
 
-    ApiHelper.generateApiResponse(
-      res,
-      req,
-      "User updated successfully",
-      200,
-      updatedUser
-    );
+    ApiHelper.generateApiResponse(res, req, "User updated successfully", 200);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Invalid user id", 500);
   }
@@ -164,13 +146,7 @@ router.delete("/:id", async (req, res) => {
     }
 
     const deletedUser = await User.findByIdAndDelete(req.params.id);
-    ApiHelper.generateApiResponse(
-      res,
-      req,
-      "User deleted successfully",
-      200,
-      deletedUser
-    );
+    ApiHelper.generateApiResponse(res, req, "User deleted successfully", 200);
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Invalid user id", 500);
   }

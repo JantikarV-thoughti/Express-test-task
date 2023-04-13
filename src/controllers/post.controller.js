@@ -3,11 +3,11 @@ const router = express.Router();
 
 const { Post, validatePost } = require("../models/post.model.js");
 const ApiHelper = require("../utils/api.helper");
-const authenticate = require("../middlewares/authenticate.middleware.js")
+const authenticate = require("../middlewares/authenticate.middleware.js");
 
 router.get("/", authenticate, async (req, res) => {
   try {
-    const posts = await Post.find().populate("user_id");
+    let posts = await Post.find().populate("user_id");
     if (posts.length === 0) {
       ApiHelper.generateApiResponse(res, req, "No posts found", 404);
       return;
@@ -49,6 +49,18 @@ router.post("/", async (req, res) => {
       return;
     }
 
+    const existingPost = await Post.findOne({ title: req.body.title });
+
+    if (existingPost) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "The post with this title already exists.",
+        409
+      );
+      return;
+    }
+
     const post = await Post.create(req.body);
 
     ApiHelper.generateApiResponse(
@@ -59,7 +71,6 @@ router.post("/", async (req, res) => {
       post
     );
   } catch (error) {
-    res.status(500).send({ message: error.message });
     ApiHelper.generateApiResponse(
       res,
       req,
@@ -75,6 +86,18 @@ router.put("/:id", async (req, res) => {
 
     if (!post) {
       ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      return;
+    }
+
+    const existingPost = await Post.findOne({ title: req.body.title });
+
+    if (existingPost) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "The post with this title already exists.",
+        409
+      );
       return;
     }
 
@@ -108,8 +131,7 @@ router.delete("/:id", async (req, res) => {
       res,
       req,
       "Post has been successfully deleted",
-      200,
-      deletedPost
+      200
     );
   } catch (error) {
     ApiHelper.generateApiResponse(res, req, "Could not delete post", 500);

@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use("/test", testController);
 app.use("/api/auth", authController);
-app.use("/api/users", userController);
+app.use("/api/users", AuthMiddleware, userController);
 app.use("/api/posts", AuthMiddleware, postController);
 
 module.exports = app;
