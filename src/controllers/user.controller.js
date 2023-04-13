@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const bcrypt = require("bcrypt");
 
 const { User, validateUser } = require("../models/user.model");
 const ApiHelper = require("../utils/api.helper");
+const isValidUsername = require("../validator/username.validator");
 
 router.get("/", async (req, res) => {
   try {
@@ -42,7 +44,14 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    if (Object.keys(req.body).length === 0) {
+      ApiHelper.generateApiResponse(res, req, "All fields required.", 400);
+      return;
+    }
+
     const { error, value } = validateUser(req.body);
+
+    console.log(error);
 
     if (error) {
       ApiHelper.generateApiResponse(res, req, error.message, 400);
@@ -56,6 +65,11 @@ router.post("/", async (req, res) => {
 
     if (existingEmail || existingUsername) {
       ApiHelper.generateApiResponse(res, req, "User already exist", 409);
+      return;
+    }
+
+    if (!isValidUsername(req.body.username)) {
+      ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
       return;
     }
 
@@ -89,11 +103,21 @@ router.put("/:id", async (req, res) => {
       return;
     }
 
+    if (req.body.password) {
+      const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+      req.body.password = hashedPassword;
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true }
     );
+
+    if (!isValidUsername(updatedUser.username)) {
+      ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
+      return;
+    }
 
     ApiHelper.generateApiResponse(res, req, "User updated successfully", 200);
   } catch (error) {

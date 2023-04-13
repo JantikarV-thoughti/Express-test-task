@@ -17,14 +17,30 @@ const userSchema = new mongoose.Schema({
 });
 
 const joiUserSchema = Joi.object({
-  first_name: Joi.string().required(),
-  last_name: Joi.string().required(),
-  email: Joi.string().email().required(),
-  mobile: Joi.string().length(10).required(),
-  username: Joi.string().required(),
-  user_type: Joi.string().valid("admin", "user").required(),
-  password: Joi.string().required(),
-  status: Joi.string().valid("active", "inactive").required(),
+  first_name: Joi.string().required().messages({
+    "string.empty": "first_name can not be empty",
+  }),
+  last_name: Joi.string().required().messages({
+    "string.empty": "last_name can not be empty",
+  }),
+  email: Joi.string().email().required().messages({
+    "string.empty": "email can not be empty",
+  }),
+  mobile: Joi.string().length(10).required().messages({
+    "string.empty": "mobile can not be empty",
+  }),
+  username: Joi.string().required().messages({
+    "string.empty": "username can not be empty",
+  }),
+  user_type: Joi.string().valid("admin", "user").required().messages({
+    "any.only": "user_type must be one of [admin, user] and can not be empty",
+  }),
+  password: Joi.string().required().messages({
+    "string.empty": "password can not be empty",
+  }),
+  status: Joi.string().valid("active", "inactive").required().messages({
+    "any.only": "status must be one of [active, inactive] and can not be empty",
+  }),
   tokens: Joi.array().items(Joi.object()),
 });
 

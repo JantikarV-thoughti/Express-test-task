@@ -21,10 +21,21 @@ const postSchema = new mongoose.Schema(
 );
 
 const joiPostSchema = Joi.object({
-  title: Joi.string().min(5).max(50).required(),
-  description: Joi.string().min(10).required(),
-  is_published: Joi.boolean().required(),
-  status: Joi.boolean().required(),
+  title: Joi.string().min(5).max(50).required().messages({
+    "string.empty": "Title can not be empty",
+    "string.min": "Title length must be atleast 5 characters long.",
+    "string.max": "Title length must not exceed 50 characters long.",
+  }),
+  description: Joi.string().min(10).required().messages({
+    "string.empty": "description can not be empty",
+    "string.min": "description length must be atleast 10 characters long.",
+  }),
+  is_published: Joi.boolean().required().messages({
+    "boolean.base": "is_published must be a boolean value",
+  }),
+  status: Joi.boolean().required().messages({
+    "boolean.base": "status must be a boolean value",
+  }),
   user_id: Joi.string().pattern(/^[0-9a-fA-F]{24}$/),
 });
 

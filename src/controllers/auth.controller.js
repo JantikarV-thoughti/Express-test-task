@@ -6,15 +6,21 @@ const { User, validateUser } = require("../models/user.model");
 const ApiHelper = require("../utils/api.helper");
 
 const authenticate = require("../middlewares/authenticate.middleware.js");
+const isValidUsername = require("../validator/username.validator");
 
 const newToken = (user) => {
   return jwt.sign({ user_id: user._id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: 15 * 60,
+    expiresIn: "1d",
   });
 };
 
 router.post("/register", async (req, res) => {
   try {
+    if (Object.keys(req.body).length === 0) {
+      ApiHelper.generateApiResponse(res, req, "All fields required.", 400);
+      return;
+    }
+
     const { error } = validateUser(req.body);
 
     if (error) {
@@ -32,6 +38,11 @@ router.post("/register", async (req, res) => {
       return;
     }
 
+    if (!isValidUsername(req.body.username)) {
+      ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
+      return;
+    }
+
     const user = await User.create(req.body);
 
     ApiHelper.generateApiResponse(
@@ -41,6 +52,7 @@ router.post("/register", async (req, res) => {
       201
     );
   } catch (error) {
+    console.log(error);
     ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
   }
 });
@@ -74,7 +86,12 @@ router.post("/login", async (req, res) => {
     }
 
     if (user.status === "inactive") {
-      ApiHelper.generateApiResponse(res, req, "Inactive user; disabled", 401);
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "Inactive user; User disabled",
+        401
+      );
       return;
     }
 
@@ -85,7 +102,7 @@ router.post("/login", async (req, res) => {
     if (oldTokens.length) {
       oldTokens = oldTokens.filter((item) => {
         const timeDiff = (Date.now() - parseInt(item.signedAt)) / 1000;
-        if (timeDiff < 900) {
+        if (timeDiff < 86400) {
           return item;
         }
       });

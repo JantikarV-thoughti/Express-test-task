@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
       res,
       req,
       "Please provide a valid authorization token",
-      400
+      401
     );
     return;
   }
@@ -39,8 +39,8 @@ module.exports = async (req, res, next) => {
       res,
       req,
       "Please provide a valid authorization token",
-      400
-    );
+      401
+    )
     return;
   }
 

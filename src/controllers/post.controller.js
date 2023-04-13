@@ -7,7 +7,7 @@ const authenticate = require("../middlewares/authenticate.middleware.js");
 
 router.get("/", authenticate, async (req, res) => {
   try {
-    let posts = await Post.find().populate("user_id");
+    let posts = await Post.find();
     if (posts.length === 0) {
       ApiHelper.generateApiResponse(res, req, "No posts found", 404);
       return;
@@ -42,7 +42,11 @@ router.get("/:id", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { error } = validatePost(req.body);
+    if (Object.keys(req.body).length === 0) {
+      ApiHelper.generateApiResponse(res, req, "All fields required.", 400);
+      return;
+    }
+    const { error, } = validatePost(req.body);
 
     if (error) {
       ApiHelper.generateApiResponse(res, req, error.message, 400);
@@ -101,6 +105,19 @@ router.put("/:id", async (req, res) => {
       return;
     }
 
+    if (
+      typeof req.body.status !== "boolean" ||
+      typeof req.body.is_published !== "boolean"
+    ) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "Please provide valid value for status or is_published, it is either true or false",
+        400
+      );
+      return;
+    }
+
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
     });
@@ -134,6 +151,7 @@ router.delete("/:id", async (req, res) => {
       200
     );
   } catch (error) {
+    console.log(error)
     ApiHelper.generateApiResponse(res, req, "Could not delete post", 500);
   }
 });
