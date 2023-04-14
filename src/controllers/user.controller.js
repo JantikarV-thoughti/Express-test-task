@@ -32,13 +32,13 @@ router.get("/:id", async (req, res) => {
     const user = await User.findById(req.params.id, { password: 0, tokens: 0 });
 
     if (user === null) {
-      ApiHelper.generateApiResponse(res, req, "User not found", 400);
+      ApiHelper.generateApiResponse(res, req, "User not found", 404);
       return;
     }
 
     ApiHelper.generateApiResponse(res, req, "User found", 200, user);
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Invalid user id", 404);
+    ApiHelper.generateApiResponse(res, req, "Something went wrong while getting user", 500);
   }
 });
 

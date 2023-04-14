@@ -1,10 +1,542 @@
 {
 	"info": {
-		"_postman_id": "27d01f70-01cb-457c-9469-46ac5290ecfc",
+		"_postman_id": "a259dc20-9e18-4c3c-a8df-eaf2d7627a8d",
 		"name": "Vinod-Jantikar-ExpressApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "001-Register-new-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"first_name\": \"Test\",\r\n    \"last_name\": \"User1\",\r\n    \"email\": \"testuser1@mailinator.com\",\r\n    \"mobile\": \"1234567890\",\r\n    \"username\": \"testuser1\",\r\n    \"user_type\": \"user\",\r\n    \"password\": \"12345\",\r\n    \"status\": \"active\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_PATH}}/api/auth/register",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "001-Register-new-user-Success-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Test\",\r\n    \"last_name\": \"User1\",\r\n    \"email\": \"testuser1@mailinator.com\",\r\n    \"mobile\": \"1234567890\",\r\n    \"username\": \"testuser1\",\r\n    \"user_type\": \"user\",\r\n    \"password\": \"12345\",\r\n    \"status\": \"active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/register",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"55-tjdm/Ha9dmxj33lfGok0gWu+yLA\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 05:59:48 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"User registered successfully\",\n    \"error\": \"\",\n    \"result\": []\n}"
+						},
+						{
+							"name": "001-Register-new-user-Error-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"first_name\": \"Test\",\r\n    \"last_name\": \"User1\",\r\n    \"email\": \"testuser1@mailinator.com\",\r\n    \"mobile\": \"1234567890\",\r\n    \"username\": \"testuser1\",\r\n    \"user_type\": \"user\",\r\n    \"password\": \"12345\",\r\n    \"status\": \"active\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/register",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "95"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5f-jOJCnVaMtvj6ZlxR+P5S22wbYBY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:01:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"User already exists\",\n    \"error\": \"User already exists\",\n    \"result\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "002-Login-user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseStatusCode = pm.response.code;\r",
+									"var responseData = JSON.parse(responseBody);\r",
+									"var resultData = responseData.result;\r",
+									"if(responseStatusCode == 200){\r",
+									"    var accessToken = resultData.token;\r",
+									"    pm.collectionVariables.set(\"TMP_SUPERADMIN_BEARER_AUTH\", accessToken);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"testuser1@mailinator.com\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_PATH}}/api/auth/login",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "002-Login-user-Success-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser1@mailinator.com\",\r\n    \"password\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/login",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "272"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"110-UiR06cMD3x/H6RgxdpqAjUfeWbk\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:10:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"User logged in successfully.\",\n    \"error\": \"\",\n    \"result\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzOGViZDQ2YWQ1Y2I2NGRhN2I0YWU1IiwiaWF0IjoxNjgxNDUyNjEwLCJleHAiOjE2ODE1MzkwMTB9.dsctEz8xviF8-ymf97Pqrzq5I_1zfclAJqxEE5-lSWc\"\n    }\n}"
+						},
+						{
+							"name": "002-Login-user-Error-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"testuser@mailinator.com\",\r\n    \"password\": \"12345\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/login",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"71-90XSYjECDWRKFJnhczVusnJyNuY\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:16:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Invalid username or password\",\n    \"error\": \"Invalid username or password\",\n    \"result\": []\n}"
+						}
+					]
+				},
+				{
+					"name": "003-Logout-user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var responseStatusCode = pm.response.code;\r",
+									"if(responseStatusCode == 200){\r",
+									"    pm.collectionVariables.set(\"TMP_SUPERADMIN_BEARER_AUTH\", \"xxxxx\");\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TMP_SUPERADMIN_BEARER_AUTH}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+								"key": "Authorization",
+								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_PATH}}/api/auth/logout",
+							"host": [
+								"{{BASE_PATH}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "003-Logout-user-Success-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/logout",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "80"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"50-6tzGY4mUyjaFwOk2cHzAPZZXrUg\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:19:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Logged out successfully\",\n    \"error\": \"\",\n    \"result\": []\n}"
+						},
+						{
+							"name": "003-Logout-user-Error-Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
+										"key": "Authorization",
+										"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
+										"type": "default"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_PATH}}/api/auth/logout",
+									"host": [
+										"{{BASE_PATH}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "141"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8d-qHXpbsZBbeqHyVXYHreIB6Wsx54\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:17:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Please provide a valid authorization token\",\n    \"error\": \"Please provide a valid authorization token\",\n    \"result\": []\n}"
+						}
+					]
+				}
+			]
+		},
 		{
 			"name": "Users",
 			"item": [
@@ -42,6 +574,15 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{BASE_PATH}}/api/users",
 									"host": [
@@ -62,20 +603,24 @@
 									"value": "Express"
 								},
 								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
 									"key": "Content-Type",
 									"value": "application/json; charset=utf-8"
 								},
 								{
 									"key": "Content-Length",
-									"value": "466"
+									"value": "282"
 								},
 								{
 									"key": "ETag",
-									"value": "W/\"1d2-tqWkG5KRSJ0o7/8bu7eUkHej0kM\""
+									"value": "W/\"11a-pJs/rPBfa+4Yj6BcD40DYQl7O4s\""
 								},
 								{
 									"key": "Date",
-									"value": "Fri, 07 Apr 2023 04:18:53 GMT"
+									"value": "Fri, 14 Apr 2023 06:26:04 GMT"
 								},
 								{
 									"key": "Connection",
@@ -87,7 +632,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Users fetched successfully\",\n    \"error\": \"\",\n    \"result\": [\n        {\n            \"_id\": \"64381157bf7a42b0d5c4e15f\",\n            \"first_name\": \"Ravindra\",\n            \"last_name\": \"Jadeja\",\n            \"email\": \"jadeja@gmail.com\",\n            \"mobile\": \"1234567890\",\n            \"username\": \"Ravindra_Jadeja\",\n            \"user_type\": \"user\",\n            \"status\": \"active\",\n            \"__v\": 0\n        }\n    ]\n}"
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Users fetched successfully\",\n    \"error\": \"\",\n    \"result\": [\n        {\n            \"_id\": \"6438ebd46ad5cb64da7b4ae5\",\n            \"first_name\": \"Test\",\n            \"last_name\": \"User1\",\n            \"email\": \"testuser1@mailinator.com\",\n            \"mobile\": \"1234567890\",\n            \"username\": \"testuser1\",\n            \"user_type\": \"user\",\n            \"status\": \"active\",\n            \"__v\": 0\n        }\n    ]\n}"
 						},
 						{
 							"name": "001-Get-All-Users-Error-Response",
@@ -114,10 +659,45 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "x-request-id",
+									"value": "abc123"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "141"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"8d-qHXpbsZBbeqHyVXYHreIB6Wsx54\""
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Apr 2023 06:27:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
 							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"The token is not valid\",\r\n    \"error\": \"The token is not valid\",\r\n    \"result\": []\r\n}"
+							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Please provide a valid authorization token\",\n    \"error\": \"Please provide a valid authorization token\",\n    \"result\": []\n}"
 						}
 					]
 				},
@@ -280,7 +860,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n \"first_name\": \"Rohit\",\r\n \"last_name\": \"Sharma\",\r\n \"email\": \"sharma@gmail.com\",\r\n \"mobile\": \"1234567890\",\r\n \"username\": \"Rohit_Sharma\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
+							"raw": "{\r\n    \"first_name\": \"Test\",\r\n    \"last_name\": \"User2\",\r\n    \"email\": \"testuser2@mailinator.com\",\r\n    \"mobile\": \"1234567890\",\r\n    \"username\": \"testuser2\",\r\n    \"user_type\": \"user\",\r\n    \"password\": \"12345\",\r\n    \"status\": \"inactive\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -499,7 +1079,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"password\": \"54321\"\r\n}",
+							"raw": "{\r\n   \"password\": \"54321\",\r\n   \"status\": \"active\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -519,7 +1099,7 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": "643826a69bce11bf0620b188"
+									"value": "6438f45b3ab284c6255e220d"
 								}
 							]
 						}
@@ -988,7 +1568,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzODExNTdiZjdhNDJiMGQ1YzRlMTVmIiwiaWF0IjoxNjgxNDAzNzc0LCJleHAiOjE2ODE0OTAxNzR9.sj3bpwNsvJz7TJ2feyBjIVY8t9ww-9JbAporRr0_7Dg",
+						"value": "{{TMP_SUPERADMIN_BEARER_AUTH}}",
 						"type": "string"
 					}
 				]
@@ -1359,7 +1939,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"title three\",\r\n    \"description\": \"description three\",\r\n    \"is_published\": true,\r\n    \"status\": true,\r\n    \"user_id\": \"643826a69bce11bf0620b188\"\r\n}",
+							"raw": "{\r\n    \"title\": \"Test Post 2\",\r\n    \"description\": \"Test Post 2 description\",\r\n    \"is_published\": false,\r\n    \"status\": false,\r\n    \"user_id\": \"6438ebd46ad5cb64da7b4ae5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1382,10 +1962,13 @@
 							"name": "002-Create-new-Post-Succes",
 							"originalRequest": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post created successfully\",\r\n    \"error\": \"\",\r\n    \"result\": {\r\n        \"title\": \"title three\",\r\n        \"description\": \"description three\",\r\n        \"is_published\": true,\r\n        \"status\": true,\r\n        \"user_id\": \"643826a69bce11bf0620b188\",\r\n        \"_id\": \"64382a400e679cb3745fb791\",\r\n        \"createdAt\": \"2023-04-13T16:13:52.152Z\",\r\n        \"updatedAt\": \"2023-04-13T16:13:52.152Z\"\r\n    }\r\n}"
 						},
@@ -1947,8 +2530,8 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Post has been successfully deleted\",\r\n    \"error\": \"\",\r\n    \"result\": []\r\n}"
 						},
@@ -2086,7 +2669,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzODExNTdiZjdhNDJiMGQ1YzRlMTVmIiwiaWF0IjoxNjgxNDAzNzc0LCJleHAiOjE2ODE0OTAxNzR9.sj3bpwNsvJz7TJ2feyBjIVY8t9ww-9JbAporRr0_7Dg",
+						"value": "{{TMP_SUPERADMIN_BEARER_AUTH}}",
 						"type": "string"
 					}
 				]
@@ -2109,419 +2692,6 @@
 							""
 						]
 					}
-				}
-			]
-		},
-		{
-			"name": "Auth",
-			"item": [
-				{
-					"name": "001-Register-new-user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n \"first_name\": \"Ravindra\",\r\n \"last_name\": \"Jadeja\",\r\n \"email\": \"jadeja@gmail.com\",\r\n \"mobile\": \"1234567890\",\r\n \"username\": \"Ravindra_Jadeja\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/auth/register",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Register-new-user-Success",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n\"name\": \"Messi\",\r\n\"email\": \"messi@gmail.com\",\r\n\"mobile\": 5463214587,\r\n\"password\": \"12345\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/register",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User registered successfully\",\r\n    \"error\": \"\",\r\n    \"result\": []\r\n}"
-						},
-						{
-							"name": "Register-new-user-Error-already-existing-error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n\"name\": \"Pablo Pandey\",\r\n\"email\": \"pablo@gmail.com\",\r\n\"mobile\": 5862354783,\r\n\"password\": \"1234\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/register",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User already exists\",\r\n    \"error\": \"User already exists\",\r\n    \"result\": []\r\n}"
-						},
-						{
-							"name": "Register-new-user-err-field-required",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n \"first_name\": \"Suresh\",\r\n \"last_name\": \"Raina\",\r\n \"email\": \"raina@gmail.com\",\r\n \"mobile\": \"1234567890\",\r\n \"username\": \"Suresh Raina\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/register",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"first_name can not be empty\",\r\n    \"error\": \"first_name can not be empty\",\r\n    \"result\": []\r\n}"
-						},
-						{
-							"name": "Register-new-user-error-all-fields-required",
-							"originalRequest": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n \"first_name\": \"Suresh\",\r\n \"last_name\": \"Raina\",\r\n \"email\": \"raina@gmail.com\",\r\n \"mobile\": \"1234567890\",\r\n \"username\": \"Suresh Raina\",\r\n \"user_type\": \"user\",\r\n \"password\": \"12345\",\r\n \"status\": \"active\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/register",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"register"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"All fields required.\",\r\n    \"error\": \"All fields required.\",\r\n    \"result\": []\r\n}"
-						}
-					]
-				},
-				{
-					"name": "002-Login-user",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI2MDUwLCJleHAiOjE2ODEyMjY5NTB9.IPAiNSVKpxnf1YuLs7jZNtQ5T824cL3f3CSi7D2wk-s",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"jadeja@gmail.com\",\r\n    \"password\": \"12345\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_PATH}}/api/auth/login",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Login-user-Success",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User logged in successfully.\",\r\n    \"error\": \"\",\r\n    \"result\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjZlOGE4NmVkMWM0YzUzYTYyN2M5IiwiaWF0IjoxNjgxMjg5MDEwLCJleHAiOjE2ODEyODk5MTB9.L1SthLs1wYrwg-9QQ99z6M_gaVb55wJt6-Gxcs7w21k\"\r\n}"
-						},
-						{
-							"name": "Login-user-Error",
-							"originalRequest": {
-								"method": "GET",
-								"header": []
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Invalid username or password\",\r\n    \"error\": \"Invalid username or password\",\r\n    \"result\": []\r\n}"
-						}
-					]
-				},
-				{
-					"name": "003-Logout-user",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzODExNTdiZjdhNDJiMGQ1YzRlMTVmIiwiaWF0IjoxNjgxNDAzNzc0LCJleHAiOjE2ODE0OTAxNzR9.sj3bpwNsvJz7TJ2feyBjIVY8t9ww-9JbAporRr0_7Dg",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-								"key": "Authorization",
-								"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
-								"type": "default"
-							}
-						],
-						"url": {
-							"raw": "{{BASE_PATH}}/api/auth/logout",
-							"host": [
-								"{{BASE_PATH}}"
-							],
-							"path": [
-								"api",
-								"auth",
-								"logout"
-							]
-						}
-					},
-					"response": [
-						{
-							"name": "Logout-user-Error",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/logout",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"The token is not valid\",\r\n    \"error\": \"The token is not valid\",\r\n    \"result\": []\r\n}"
-						},
-						{
-							"name": "003-Logout-user-Error-Response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/logout",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"status": "Unauthorized",
-							"code": 401,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "x-request-id",
-									"value": "abc123"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "141"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"8d-qHXpbsZBbeqHyVXYHreIB6Wsx54\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 13 Apr 2023 16:34:19 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Please provide a valid authorization token\",\n    \"error\": \"Please provide a valid authorization token\",\n    \"result\": []\n}"
-						},
-						{
-							"name": "003-Logout-user-Success-Response",
-							"originalRequest": {
-								"method": "POST",
-								"header": [
-									{
-										"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman.",
-										"key": "Authorization",
-										"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNTY4MDRhZDJkYWYwMTE1OTNhNjU5IiwiaWF0IjoxNjgxMjI1ODk5LCJleHAiOjE2ODEyMjY3OTl9.-2cHi7j217WOazTdB-gm2vjPmLGj_7MK0VBdBy-DVT8",
-										"type": "default"
-									}
-								],
-								"url": {
-									"raw": "{{BASE_PATH}}/api/auth/logout",
-									"host": [
-										"{{BASE_PATH}}"
-									],
-									"path": [
-										"api",
-										"auth",
-										"logout"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "X-Powered-By",
-									"value": "Express"
-								},
-								{
-									"key": "x-request-id",
-									"value": "abc123"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json; charset=utf-8"
-								},
-								{
-									"key": "Content-Length",
-									"value": "80"
-								},
-								{
-									"key": "ETag",
-									"value": "W/\"50-6tzGY4mUyjaFwOk2cHzAPZZXrUg\""
-								},
-								{
-									"key": "Date",
-									"value": "Thu, 13 Apr 2023 16:36:54 GMT"
-								},
-								{
-									"key": "Connection",
-									"value": "keep-alive"
-								},
-								{
-									"key": "Keep-Alive",
-									"value": "timeout=5"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"requestToken\": null,\n    \"message\": \"Logged out successfully\",\n    \"error\": \"\",\n    \"result\": []\n}"
-						}
-					]
 				}
 			]
 		}
@@ -2550,6 +2720,11 @@
 		{
 			"key": "BASE_PATH",
 			"value": "http://localhost:8989",
+			"type": "default"
+		},
+		{
+			"key": "TMP_SUPERADMIN_BEARER_AUTH",
+			"value": "xxxxx",
 			"type": "default"
 		}
 	]
