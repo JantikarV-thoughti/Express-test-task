@@ -21,7 +21,12 @@ router.get("/", authenticate, async (req, res) => {
       posts
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Cannot find posts", 500);
+    ApiHelper.generateApiResponse(
+      res,
+      req,
+      "Somethimg went wrong while getting all posts.",
+      500
+    );
   }
 });
 
@@ -30,13 +35,18 @@ router.get("/:id", async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (!post) {
-      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      ApiHelper.generateApiResponse(res, req, "Post not found", 404);
       return;
     }
 
     ApiHelper.generateApiResponse(res, req, "Post found", 200, post);
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Post not found", 500);
+    ApiHelper.generateApiResponse(
+      res,
+      req,
+      "Something went wrong, could not find post.",
+      500
+    );
   }
 });
 
@@ -46,7 +56,7 @@ router.post("/", async (req, res) => {
       ApiHelper.generateApiResponse(res, req, "All fields required.", 400);
       return;
     }
-    const { error, } = validatePost(req.body);
+    const { error } = validatePost(req.body);
 
     if (error) {
       ApiHelper.generateApiResponse(res, req, error.message, 400);
@@ -59,7 +69,7 @@ router.post("/", async (req, res) => {
       ApiHelper.generateApiResponse(
         res,
         req,
-        "The post with this title already exists.",
+        "The post with smae title already exist.",
         409
       );
       return;
@@ -78,7 +88,7 @@ router.post("/", async (req, res) => {
     ApiHelper.generateApiResponse(
       res,
       req,
-      "Could not create post. Please try again later.",
+      "Something went wrong, please try again later.",
       500
     );
   }
@@ -86,36 +96,64 @@ router.post("/", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-
-    if (!post) {
-      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+    if (Object.keys(req.body).length === 0) {
+      ApiHelper.generateApiResponse(res, req, "Inputs can not be empty.", 400);
       return;
     }
 
-    const existingPost = await Post.findOne({ title: req.body.title });
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      ApiHelper.generateApiResponse(res, req, "Post not found", 404);
+      return;
+    }
+
+    const existingPost = await Post.findOne({
+      $and: [{ title: req.body.title }, { _id: { $ne: req.params.id } }],
+    });
 
     if (existingPost) {
       ApiHelper.generateApiResponse(
         res,
         req,
-        "The post with this title already exists.",
+        "The post with same title already exists.",
         409
       );
       return;
     }
 
-    if (
-      typeof req.body.status !== "boolean" ||
-      typeof req.body.is_published !== "boolean"
-    ) {
+    if (req.body.status) {
+      if (req.body.status !== "active" || req.body.status !== "inactive") {
+        ApiHelper.generateApiResponse(
+          res,
+          req,
+          "Status must be either active or inactive.",
+          400
+        );
+        return;
+      }
+    }
+
+    if (req.body.status == false) {
       ApiHelper.generateApiResponse(
         res,
         req,
-        "Please provide valid value for status or is_published, it is either true or false",
+        "Status must be either active or inactive",
         400
       );
       return;
+    }
+
+    if (req.body.is_published) {
+      if (typeof req.body.is_published !== "boolean") {
+        ApiHelper.generateApiResponse(
+          res,
+          req,
+          "Please provide valid value for is_published, it is either true or false",
+          400
+        );
+        return;
+      }
     }
 
     const updatedPost = await Post.findByIdAndUpdate(req.params.id, req.body, {
@@ -126,11 +164,11 @@ router.put("/:id", async (req, res) => {
       res,
       req,
       "Post updated successfully",
-      201,
+      200,
       updatedPost
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Invalid post Id", 500);
+    ApiHelper.generateApiResponse(res, req, "Something went wrong.", 500);
   }
 });
 
@@ -139,7 +177,7 @@ router.delete("/:id", async (req, res) => {
     const post = await Post.findById(req.params.id);
 
     if (!post) {
-      ApiHelper.generateApiResponse(res, req, "Post not found", 400);
+      ApiHelper.generateApiResponse(res, req, "Post not found", 404);
       return;
     }
 
@@ -151,8 +189,13 @@ router.delete("/:id", async (req, res) => {
       200
     );
   } catch (error) {
-    console.log(error)
-    ApiHelper.generateApiResponse(res, req, "Could not delete post", 500);
+    console.log(error);
+    ApiHelper.generateApiResponse(
+      res,
+      req,
+      "Something went wrong, while deleting the post.",
+      500
+    );
   }
 });
 

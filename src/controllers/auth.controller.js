@@ -1,21 +1,11 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 const { User, validateUser } = require("../models/user.model");
 const ApiHelper = require("../utils/api.helper");
-
 const authenticate = require("../middlewares/authenticate.middleware.js");
 const isValidUsername = require("../validator/username.validator");
-
-const JWT_SECRET_KEY =
-  process.env.JWT_SECRET_KEY || "tyuujnhjgfvbnkajadhadhhdahduiu";
-const JWT_TOKEN_EXPIRY = process.env.JWT_TOKEN_EXPIRY || "1d";
-const newToken = (user) => {
-  return jwt.sign({ user_id: user._id }, JWT_SECRET_KEY, {
-    expiresIn: JWT_TOKEN_EXPIRY,
-  });
-};
+const newToken = require("../utils/jwt.helper");
 
 router.post("/register", async (req, res) => {
   try {
@@ -60,17 +50,27 @@ router.post("/register", async (req, res) => {
       return;
     }
 
-    const user = await User.create(req.body);
+    let user = await User.create(req.body);
+
+    user = await User.findOne(
+      { email: req.body.email },
+      { password: 0, tokens: 0 }
+    );
 
     ApiHelper.generateApiResponse(
       res,
       req,
       "User registered successfully",
-      201
+      201,
+      user
     );
   } catch (error) {
-    console.log(error);
-    ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
+    ApiHelper.generateApiResponse(
+      res,
+      req,
+      "Something went wrong while registering.",
+      500
+    );
   }
 });
 
@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
       ApiHelper.generateApiResponse(
         res,
         req,
-        "Invalid username or password",
+        "Invalid email, please enter the correct email.",
         401
       );
       return;
@@ -96,7 +96,7 @@ router.post("/login", async (req, res) => {
       ApiHelper.generateApiResponse(
         res,
         req,
-        "Invalid username or password",
+        "Invalid password, please enter the correct password.",
         401
       );
       return;
@@ -137,7 +137,12 @@ router.post("/login", async (req, res) => {
       { token: token }
     );
   } catch (error) {
-    ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
+    ApiHelper.generateApiResponse(
+      res,
+      req,
+      "Something went wrong, please try again",
+      500
+    );
   }
 });
 
