@@ -108,6 +108,34 @@ router.put("/:id", async (req, res) => {
       return;
     }
 
+    const fieldNames = [
+      "title",
+      "description",
+      "is_published",
+      "status",
+      "user_id",
+    ];
+
+    let count = 0;
+
+    for (let key in req.body) {
+      for (let i = 0; i < fieldNames.length; i++) {
+        if (key === fieldNames[i]) {
+          count++;
+        }
+      }
+    }
+
+    if (count === 0) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "Invalid field name entered",
+        400
+      );
+      return;
+    }
+
     const existingPost = await Post.findOne({
       $and: [{ title: req.body.title }, { _id: { $ne: req.params.id } }],
     });

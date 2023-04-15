@@ -135,6 +135,37 @@ router.put("/:id", async (req, res) => {
       return;
     }
 
+    const fieldNames = [
+      "first_name",
+      "last_name",
+      "email",
+      "mobile",
+      "username",
+      "user_type",
+      "password",
+      "status",
+    ];
+
+    let count = 0;
+
+    for (let key in req.body) {
+      for (let i = 0; i < fieldNames.length; i++) {
+        if (key === fieldNames[i]) {
+          count++;
+        }
+      }
+    }
+
+    if (count === 0) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "Invalid field name entered",
+        400
+      );
+      return;
+    }
+
     const existingEmail = await User.findOne({
       $and: [{ email: req.body.email }, { _id: { $ne: req.params.id } }],
     });
@@ -231,6 +262,38 @@ router.patch("/:id", async (req, res) => {
       ApiHelper.generateApiResponse(res, req, "User not found", 404);
       return;
     }
+
+    const fieldNames = [
+      "first_name",
+      "last_name",
+      "email",
+      "mobile",
+      "username",
+      "user_type",
+      "password",
+      "status",
+    ];
+
+    let count = 0;
+
+    for (let key in req.body) {
+      for (let i = 0; i < fieldNames.length; i++) {
+        if (key === fieldNames[i]) {
+          count++;
+        }
+      }
+    }
+
+    if (count === 0) {
+      ApiHelper.generateApiResponse(
+        res,
+        req,
+        "Invalid field name entered",
+        400
+      );
+      return;
+    }
+
 
     const existingEmail = await User.findOne({
       $and: [{ email: req.body.email }, { _id: { $ne: req.params.id } }],
