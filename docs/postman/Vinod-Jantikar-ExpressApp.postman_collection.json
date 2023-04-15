@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "27d01f70-01cb-457c-9469-46ac5290ecfc",
+		"_postman_id": "c4756201-bf25-46bd-b64f-b24b1676d111",
 		"name": "Vinod-Jantikar-ExpressApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -61,8 +61,8 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User registered successfully\",\r\n    \"error\": \"\",\r\n    \"result\": []\r\n}"
 						},
@@ -92,8 +92,8 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User already exists\",\r\n    \"error\": \"User already exists\",\r\n    \"result\": []\r\n}"
 						},
@@ -123,8 +123,8 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"first_name can not be empty\",\r\n    \"error\": \"first_name can not be empty\",\r\n    \"result\": []\r\n}"
 						},
@@ -154,8 +154,8 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"All fields required.\",\r\n    \"error\": \"All fields required.\",\r\n    \"result\": []\r\n}"
 						}
@@ -212,10 +212,13 @@
 							"name": "Login-user-Success",
 							"originalRequest": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"User logged in successfully.\",\r\n    \"error\": \"\",\r\n    \"result\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjQzNjZlOGE4NmVkMWM0YzUzYTYyN2M5IiwiaWF0IjoxNjgxMjg5MDEwLCJleHAiOjE2ODEyODk5MTB9.L1SthLs1wYrwg-9QQ99z6M_gaVb55wJt6-Gxcs7w21k\"\r\n}"
 						},
@@ -223,10 +226,13 @@
 							"name": "Login-user-Error",
 							"originalRequest": {
 								"method": "GET",
-								"header": []
+								"header": [],
+								"url": {
+									"raw": ""
+								}
 							},
-							"_postman_previewlanguage": null,
-							"header": null,
+							"_postman_previewlanguage": "Text",
+							"header": [],
 							"cookie": [],
 							"body": "{\r\n    \"requestToken\": null,\r\n    \"message\": \"Invalid username or password\",\r\n    \"error\": \"Invalid username or password\",\r\n    \"result\": []\r\n}"
 						}
@@ -437,6 +443,26 @@
 							"path": [
 								"api",
 								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "[search]",
+									"description": "Apply filer on columns: first_name, last_name, mobile, email, username",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "[status]",
+									"description": "active / inactive",
+									"disabled": true
+								},
+								{
+									"key": "user_type",
+									"value": "[user_type]",
+									"description": "admin / user",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -446,15 +472,6 @@
 							"originalRequest": {
 								"method": "GET",
 								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
 								"url": {
 									"raw": "{{BASE_PATH}}/api/users",
 									"host": [
@@ -1560,6 +1577,32 @@
 							"path": [
 								"api",
 								"posts"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "[search]",
+									"description": "Apply filer on columns: title, description",
+									"disabled": true
+								},
+								{
+									"key": "is_published",
+									"value": "[is_published]",
+									"description": "active / inactive",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "[status]",
+									"description": "active / inactive",
+									"disabled": true
+								},
+								{
+									"key": "user",
+									"value": "[user]",
+									"description": "apply filter on column: user_id",
+									"disabled": true
+								}
 							]
 						}
 					},
