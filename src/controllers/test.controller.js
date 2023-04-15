@@ -1,14 +1,13 @@
-const express = require('express')
+const express = require("express");
 
-const router = express.Router()
+const router = express.Router();
 
-
-router.get('/', async(req, res)=> {
+router.get("/", async (req, res) => {
     try {
-        res.status(200).send({message: "Successfully Tested"})
+        res.status(200).send({ message: "Successfully Tested" });
     } catch (error) {
-        res.status(500).send({message: error.message})
+        res.status(500).send({ message: error.message });
     }
-})
+});
 
-module.exports = router
+module.exports = router;

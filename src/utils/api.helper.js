@@ -56,15 +56,12 @@ const ApiHelper = {
             requestToken = req.query.request_token;
         }
 
-        return res
-            .status(code)
-            .setHeader("x-request-id", "abc123")
-            .send({
-                requestToken,
-                message,
-                error,
-                result,
-            });
+        return res.status(code).setHeader("x-request-id", "abc123").send({
+            requestToken,
+            message,
+            error,
+            result,
+        });
     },
 };
 
