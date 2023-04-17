@@ -4,10 +4,10 @@ const { User } = require("../models/user.model");
 const verifyToken = async (token) => {
     try {
         const decoded = await JwtHelper.verify(token);
-
+    
         const existingUser = await User.findOne({ _id: decoded.user_id });
 
-        if (existingUser.tokens[0].token !== token) {
+        if (existingUser.token !== token) {
             ApiHelper.generateApiResponse(res, req, "User not found", 400);
             return;
         }

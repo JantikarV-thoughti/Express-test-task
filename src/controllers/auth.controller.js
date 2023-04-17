@@ -58,7 +58,7 @@ router.post("/register", async (req, res) => {
 
         user = await User.findOne(
             { email: req.body.email },
-            { password: 0, tokens: 0 }
+            { password: 0, token: 0 }
         );
 
         ApiHelper.generateApiResponse(
@@ -119,27 +119,14 @@ router.post("/login", async (req, res) => {
         let payload = { user_id: user._id };
         const token = await JwtHelper.sign(payload);
 
-        let oldTokens = user.tokens || [];
-
-        if (oldTokens.length) {
-            oldTokens = oldTokens.filter((item) => {
-                const timeDiff = (Date.now() - parseInt(item.signedAt)) / 1000;
-                if (timeDiff < 86400) {
-                    return item;
-                }
-            });
-        }
-
-        await User.findByIdAndUpdate(user._id, {
-            tokens: [{ token, signedAt: Date.now().toString() }],
-        });
+        await User.findByIdAndUpdate(user._id, { token });
 
         ApiHelper.generateApiResponse(
             res,
             req,
             "User logged in successfully.",
             200,
-            { token: token }
+            { token }
         );
     } catch (error) {
         ApiHelper.generateApiResponse(
@@ -166,14 +153,8 @@ router.post("/logout", authenticate, async (req, res) => {
                 return;
             }
 
-            const user = await User.findById(req.user.user_id);
-
-            const tokens = user.tokens;
-
-            const newToken = tokens.filter((item) => item.token !== token);
-
             await User.findByIdAndUpdate(req.user.user_id, {
-                tokens: newToken,
+                $unset: { token: "" },
             });
             ApiHelper.generateApiResponse(
                 res,

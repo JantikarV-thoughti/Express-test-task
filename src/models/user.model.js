@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-const {schemaValidator} = require("../validator")
+const { schemaValidator } = require("../validator");
 
 const userSchema = new mongoose.Schema({
     first_name: { type: String, required: true },
@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
     user_type: { type: String, enum: ["admin", "user"], required: true },
     password: { type: String, required: true },
     status: { type: String, enum: ["active", "inactive"], required: true },
-    tokens: [{ type: Object }],
+    token: { type: String },
 });
 
 const joiUserSchema = Joi.object({
@@ -43,7 +43,7 @@ const joiUserSchema = Joi.object({
         "any.only":
             "status must be one of [active, inactive] and can not be empty",
     }),
-    tokens: Joi.array().items(Joi.object()),
+    token: Joi.string()
 });
 
 userSchema.pre("save", function (next) {
