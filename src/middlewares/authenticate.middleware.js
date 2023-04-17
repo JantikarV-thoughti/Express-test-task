@@ -1,11 +1,9 @@
-const jwt = require("jsonwebtoken");
-
-const ApiHelper = require("../utils/api.helper");
+const { ApiHelper, JwtHelper } = require("../utils");
 const { User } = require("../models/user.model");
 
 const verifyToken = async (token) => {
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        const decoded = await JwtHelper.verify(token);
 
         const existingUser = await User.findOne({ _id: decoded.user_id });
 

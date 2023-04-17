@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { User, validateUser } = require("../models/user.model");
 const authenticate = require("../middlewares/authenticate.middleware.js");
-const isValidUsername = require("../validator/username.validator");
+const { usernameValidator } = require("../validator");
 const { ApiHelper, JwtHelper } = require("../utils");
 
 router.post("/register", async (req, res) => {
@@ -49,7 +49,7 @@ router.post("/register", async (req, res) => {
             return;
         }
 
-        if (!isValidUsername(req.body.username)) {
+        if (!usernameValidator(req.body.username)) {
             ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
             return;
         }
@@ -115,8 +115,6 @@ router.post("/login", async (req, res) => {
             );
             return;
         }
-
-        // const token = newToken(user);
 
         let payload = { user_id: user._id };
         const token = await JwtHelper.sign(payload);

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 
-const validator = require("../validator/schema.validator");
+const {schemaValidator} = require("../validator")
 
 const userSchema = new mongoose.Schema({
     first_name: { type: String, required: true },
@@ -58,6 +58,6 @@ userSchema.methods.checkPassword = function (password) {
 
 const User = mongoose.model("user", userSchema);
 
-const validateUser = validator(joiUserSchema);
+const validateUser = schemaValidator(joiUserSchema);
 
 module.exports = { User, validateUser };

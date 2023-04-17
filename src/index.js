@@ -1,9 +1,11 @@
 const express = require("express");
 
-const testController = require("./controllers/test.controller");
-const authController = require("./controllers/auth.controller");
-const userController = require("./controllers/user.controller");
-const postController = require("./controllers/post.controller");
+const {
+    authController,
+    postController,
+    userController,
+    testController,
+} = require("./controllers");
 const AuthMiddleware = require("./middlewares/authenticate.middleware");
 const { ApiHelper } = require("./utils");
 
