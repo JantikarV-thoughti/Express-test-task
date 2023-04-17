@@ -2,10 +2,9 @@ const express = require("express");
 
 const router = express.Router();
 const { User, validateUser } = require("../models/user.model");
-const ApiHelper = require("../utils/api.helper");
 const authenticate = require("../middlewares/authenticate.middleware.js");
 const isValidUsername = require("../validator/username.validator");
-const newToken = require("../utils/jwt.helper");
+const { ApiHelper, JwtHelper } = require("../utils");
 
 router.post("/register", async (req, res) => {
     try {
@@ -117,7 +116,10 @@ router.post("/login", async (req, res) => {
             return;
         }
 
-        const token = newToken(user);
+        // const token = newToken(user);
+
+        let payload = { user_id: user._id };
+        const token = await JwtHelper.sign(payload);
 
         let oldTokens = user.tokens || [];
 

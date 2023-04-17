@@ -1,13 +1,23 @@
-const jwt = require("jsonwebtoken");
+const JWT = require("jsonwebtoken");
 
 const JWT_SECRET_KEY =
     process.env.JWT_SECRET_KEY || "tyuujnhjgfvbnkajadhadhhdahduiu";
 const JWT_TOKEN_EXPIRY = process.env.JWT_TOKEN_EXPIRY || "1d";
 
-const newToken = (user) => {
-    return jwt.sign({ user_id: user._id }, JWT_SECRET_KEY, {
-        expiresIn: JWT_TOKEN_EXPIRY,
-    });
+const JwtHelper = {
+    /**
+     * Generate a signed jwt token
+     * @param {object} payload Input payload to be sent via jwt token
+     * @param {string} secretKey Jwt token secret. Default value set from env variable `JWT_SECRET_KEY`
+     * @returns Returns a signed jwt token
+     */
+    sign: async (payload, secretKey = JWT_SECRET_KEY) => {
+        let jwtToken = await JWT.sign(payload, secretKey, {
+            expiresIn: JWT_TOKEN_EXPIRY,
+        });
+
+        return jwtToken;
+    },
 };
 
-module.exports = newToken;
+module.exports = JwtHelper;

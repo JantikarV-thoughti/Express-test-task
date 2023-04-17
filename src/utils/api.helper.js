@@ -1,5 +1,8 @@
+const CommonHelpers = require("./common.helper");
+const pJson = require("../../package.json");
+
 const ApiHelper = {
-    /*
+    /**
      * Generate API Response JSON using parameters provided
      *
      * @param {Object} res Response Object
@@ -56,7 +59,9 @@ const ApiHelper = {
             requestToken = req.query.request_token;
         }
 
-        return res.status(code).setHeader("x-request-id", "abc123").send({
+        res.setHeader("x-request-id", CommonHelpers.generateUniqueId());
+        res.setHeader("x-api-version", pJson.version);
+        return res.status(code).send({
             requestToken,
             message,
             error,
