@@ -18,6 +18,11 @@ const JwtHelper = {
 
         return jwtToken;
     },
+
+    verify: async (payload, secretKey = JWT_SECRET_KEY) => {
+        let verifiedToken = await JWT.verify(payload, secretKey)
+        return verifiedToken
+    }
 };
 
 module.exports = JwtHelper;

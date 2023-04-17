@@ -4,11 +4,44 @@ const bcrypt = require("bcrypt");
 
 const { User, validateUser } = require("../models/user.model");
 const ApiHelper = require("../utils/api.helper");
-const isValidUsername = require("../validator/username.validator");
+const { usernameValidator } = require("../validator");
 
 router.get("/", async (req, res) => {
     try {
-        const users = await User.find().select("-password").select("-tokens");
+        const { search, status, user_type } = req.query;
+
+        const query = {};
+
+        if (search && search.length < 3) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Search length must be more than 3 characters",
+                400
+            );
+        }
+
+        if (search) {
+            query.$or = [
+                { first_name: { $regex: search, $options: "i" } },
+                { last_name: { $regex: search, $options: "i" } },
+                { mobile: { $regex: search, $options: "i" } },
+                { email: { $regex: search, $options: "i" } },
+                { username: { $regex: search, $options: "i" } },
+            ];
+        }
+
+        if (status) {
+            query.status = status;
+        }
+
+        if (user_type) {
+            query.user_type = user_type;
+        }
+
+        const users = await User.find(query)
+            .select("-password")
+            .select("-tokens");
 
         if (users.length === 0) {
             ApiHelper.generateApiResponse(res, req, "No users found", 404);
@@ -20,9 +53,13 @@ router.get("/", async (req, res) => {
             req,
             "Users fetched successfully",
             200,
-            users
+            {
+                count: users.length,
+                rows: users,
+            }
         );
     } catch (error) {
+        console.log(error);
         ApiHelper.generateApiResponse(
             res,
             req,
@@ -100,7 +137,7 @@ router.post("/", async (req, res) => {
             return;
         }
 
-        if (!isValidUsername(req.body.username)) {
+        if (!usernameValidator(req.body.username)) {
             ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
             return;
         }
@@ -254,7 +291,7 @@ router.put("/:id", async (req, res) => {
             { new: true }
         );
 
-        if (!isValidUsername(updatedUser.username)) {
+        if (!usernameValidator(updatedUser.username)) {
             ApiHelper.generateApiResponse(
                 res,
                 req,
@@ -366,7 +403,7 @@ router.patch("/:id", async (req, res) => {
             { new: true }
         );
 
-        if (!isValidUsername(updatedUser.username)) {
+        if (!usernameValidator(updatedUser.username)) {
             ApiHelper.generateApiResponse(
                 res,
                 req,

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Joi = require("joi");
-const validator = require("../validator/schema.validator");
+
+const {schemaValidator} = require("../validator")
 
 const postSchema = new mongoose.Schema(
     {
@@ -40,7 +41,7 @@ const joiPostSchema = Joi.object({
     user_id: Joi.string().pattern(/^[0-9a-fA-F]{24}$/),
 });
 
-const validatePost = validator(joiPostSchema);
+const validatePost = schemaValidator(joiPostSchema);
 
 const Post = mongoose.model("post", postSchema);
 
