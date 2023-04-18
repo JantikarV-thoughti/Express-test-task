@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema(
     {
         title: { type: String, required: true },
         description: { type: String, required: true },
-        is_published: { type: Boolean, required: true },
+        is_published: { type: String, enum: ["active", "inactive"], required: true },
         status: { type: String, enum: ["active", "inactive"], required: true },
         user_id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -31,8 +31,9 @@ const joiPostSchema = Joi.object({
         "string.empty": "description can not be empty",
         "string.min": "description length must be atleast 10 characters long.",
     }),
-    is_published: Joi.boolean().required().messages({
-        "boolean.base": "is_published must be a boolean value",
+    is_published: Joi.string().valid("active", "inactive").required().messages({
+        "any.only":
+            "is_published must be one of [active, inactive] and can not be empty",
     }),
     status: Joi.string().valid("active", "inactive").required().messages({
         "any.only":
