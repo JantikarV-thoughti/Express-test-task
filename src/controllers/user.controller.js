@@ -136,7 +136,7 @@ router.post("/", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "User with same username already exist",
+                "User with the same username already exist.",
                 409
             );
         }
@@ -145,7 +145,7 @@ router.post("/", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid username",
+                "The username should starts with an alphabet, and should contain only alphabets, numbers or underscores.",
                 400
             );
         }
@@ -297,7 +297,7 @@ router.put("/:id", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid username, shoud not contain space.",
+                "The username should starts with an alphabet, and should contain only alphabets, numbers or underscores.",
                 400
             );
         }
@@ -439,7 +439,7 @@ router.patch("/:id", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid username, shoud not contain space.",
+                "The username should starts with an alphabet, and should contain only alphabets, numbers or underscores.",
                 400
             );
         }

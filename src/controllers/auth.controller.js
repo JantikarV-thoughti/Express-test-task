@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid username",
+                "The username should starts with an alphabet, and should contain only alphabets, numbers or underscores.",
                 400
             );
         }
