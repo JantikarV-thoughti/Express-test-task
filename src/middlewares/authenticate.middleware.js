@@ -4,9 +4,7 @@ const { User } = require("../models/user.model");
 const verifyToken = async (token) => {
     try {
         const decoded = await JwtHelper.verify(token);
-
         const existingUser = await User.findOne({ _id: decoded.user_id });
-
         if (existingUser.token !== token) {
             return ApiHelper.generateApiResponse(
                 res,
@@ -15,40 +13,29 @@ const verifyToken = async (token) => {
                 400
             );
         }
-
         return decoded;
     } catch (error) {
         return ApiHelper.generateApiResponse(res, req, "Invalid token", 500);
     }
 };
 
-module.exports = async (req, res, next) => {
-    if (!req.headers?.authorization) {
-        return ApiHelper.generateApiResponse(
-            res,
-            req,
-            "Please provide a valid authorization token",
-            401
-        );
-    }
-
-    const bearerToken = req.headers.authorization;
-
-    if (!bearerToken.startsWith("Bearer ")) {
-        return ApiHelper.generateApiResponse(
-            res,
-            req,
-            "Please provide a valid authorization token",
-            401
-        );
-    }
-
-    const token = bearerToken.split(" ")[1];
-
-    let user;
+const authenticate = async (req, res, next) => {
     try {
-        user = await verifyToken(token);
-    } catch (err) {
+        const bearerToken = req.headers.authorization;
+        if (!bearerToken || !bearerToken.startsWith("Bearer ")) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Please provide a valid authorization token",
+                401
+            );
+        }
+
+        const token = bearerToken.split(" ")[1];
+        const user = await verifyToken(token);
+        req.user = user;
+        next();
+    } catch (error) {
         return ApiHelper.generateApiResponse(
             res,
             req,
@@ -56,7 +43,6 @@ module.exports = async (req, res, next) => {
             401
         );
     }
-
-    req.user = user;
-    next();
 };
+
+module.exports = authenticate;
