@@ -4,42 +4,43 @@ const { User } = require("../models/user.model");
 const verifyToken = async (token) => {
     try {
         const decoded = await JwtHelper.verify(token);
-    
+
         const existingUser = await User.findOne({ _id: decoded.user_id });
 
         if (existingUser.token !== token) {
-            ApiHelper.generateApiResponse(res, req, "User not found", 400);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User not found",
+                400
+            );
         }
 
         return decoded;
     } catch (error) {
-        ApiHelper.generateApiResponse(res, req, "Invalid token", 500);
-        return;
+        return ApiHelper.generateApiResponse(res, req, "Invalid token", 500);
     }
 };
 
 module.exports = async (req, res, next) => {
     if (!req.headers?.authorization) {
-        ApiHelper.generateApiResponse(
+        return ApiHelper.generateApiResponse(
             res,
             req,
             "Please provide a valid authorization token",
             401
         );
-        return;
     }
 
     const bearerToken = req.headers.authorization;
 
     if (!bearerToken.startsWith("Bearer ")) {
-        ApiHelper.generateApiResponse(
+        return ApiHelper.generateApiResponse(
             res,
             req,
             "Please provide a valid authorization token",
             401
         );
-        return;
     }
 
     const token = bearerToken.split(" ")[1];
@@ -48,8 +49,12 @@ module.exports = async (req, res, next) => {
     try {
         user = await verifyToken(token);
     } catch (err) {
-        ApiHelper.generateApiResponse(res, req, "The token is not valid", 401);
-        return;
+        return ApiHelper.generateApiResponse(
+            res,
+            req,
+            "The token is not valid",
+            401
+        );
     }
 
     req.user = user;

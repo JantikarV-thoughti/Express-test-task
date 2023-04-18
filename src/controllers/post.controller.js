@@ -7,10 +7,55 @@ const authenticate = require("../middlewares/authenticate.middleware.js");
 
 router.get("/", authenticate, async (req, res) => {
     try {
-        let posts = await Post.find();
+        const { search, is_published, status, user } = req.query;
+
+        const query = {};
+
+        if (search && search.length < 3) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Search length must be more than 3 characters",
+                400
+            );
+        }
+
+        if (search) {
+            query.$or = [
+                { title: { $regex: search, $options: "i" } },
+                { description: { $regex: search, $options: "i" } },
+            ];
+        }
+
+        if (is_published) {
+            query.is_published = is_published;
+        }
+
+        if (status) {
+            query.status = status;
+        }
+
+        if (user && user.length !== 24) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User query length must be equal to 24 characters long",
+                400
+            );
+        }
+
+        if (user) {
+            query.user_id = user;
+        }
+
+        let posts = await Post.find(query);
         if (posts.length === 0) {
-            ApiHelper.generateApiResponse(res, req, "No posts found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "No posts found",
+                404
+            );
         }
 
         ApiHelper.generateApiResponse(
@@ -18,9 +63,13 @@ router.get("/", authenticate, async (req, res) => {
             req,
             "Posts fetched successfully",
             200,
-            posts
+            {
+                count: posts.length,
+                rows: posts,
+            }
         );
     } catch (error) {
+        console.log(error);
         ApiHelper.generateApiResponse(
             res,
             req,
@@ -35,8 +84,12 @@ router.get("/:id", async (req, res) => {
         const post = await Post.findById(req.params.id);
 
         if (!post) {
-            ApiHelper.generateApiResponse(res, req, "Post not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Post not found",
+                404
+            );
         }
 
         ApiHelper.generateApiResponse(res, req, "Post found", 200, post);
@@ -53,31 +106,28 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "All fields required.",
+                "All fields are required.",
                 400
             );
-            return;
         }
         const { error } = validatePost(req.body);
 
         if (error) {
-            ApiHelper.generateApiResponse(res, req, error.message, 400);
-            return;
+            return ApiHelper.generateApiResponse(res, req, error.message, 400);
         }
 
         const existingPost = await Post.findOne({ title: req.body.title });
 
         if (existingPost) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "The post with smae title already exist.",
                 409
             );
-            return;
         }
 
         const post = await Post.create(req.body);
@@ -102,20 +152,23 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Inputs can not be empty.",
                 400
             );
-            return;
         }
 
         const post = await Post.findById(req.params.id);
 
         if (!post) {
-            ApiHelper.generateApiResponse(res, req, "Post not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Post not found",
+                404
+            );
         }
 
         const fieldNames = [
@@ -151,50 +204,55 @@ router.put("/:id", async (req, res) => {
         });
 
         if (existingPost) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "The post with same title already exists.",
                 409
             );
-            return;
         }
 
-        if (req.body.status) {
-            if (
-                req.body.status !== "active" ||
-                req.body.status !== "inactive"
-            ) {
-                ApiHelper.generateApiResponse(
-                    res,
-                    req,
-                    "Status must be either active or inactive.",
-                    400
-                );
-                return;
-            }
+        if (
+            req.body.status &&
+            (req.body.status !== "active" || req.body.status !== "inactive")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Status must be either active or inactive.",
+                400
+            );
         }
 
         if (req.body.status == false) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Status must be either active or inactive",
                 400
             );
-            return;
         }
 
-        if (req.body.is_published) {
-            if (typeof req.body.is_published !== "boolean") {
-                ApiHelper.generateApiResponse(
-                    res,
-                    req,
-                    "Please provide valid value for is_published, it is either true or false",
-                    400
-                );
-                return;
-            }
+        if (
+            req.body.is_published &&
+            (req.body.is_published !== "active" ||
+                req.body.is_published !== "inactive")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "is_published must be either active or inactive.",
+                400
+            );
+        }
+
+        if (req.body.is_published == false) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "is_published must be either active or inactive",
+                400
+            );
         }
 
         const updatedPost = await Post.findByIdAndUpdate(
@@ -222,8 +280,12 @@ router.delete("/:id", async (req, res) => {
         const post = await Post.findById(req.params.id);
 
         if (!post) {
-            ApiHelper.generateApiResponse(res, req, "Post not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Post not found",
+                404
+            );
         }
 
         const deletedPost = await Post.findByIdAndDelete(req.params.id);
@@ -234,7 +296,6 @@ router.delete("/:id", async (req, res) => {
             200
         );
     } catch (error) {
-        console.log(error);
         ApiHelper.generateApiResponse(
             res,
             req,

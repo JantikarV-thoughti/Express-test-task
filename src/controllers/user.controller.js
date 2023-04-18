@@ -44,8 +44,12 @@ router.get("/", async (req, res) => {
             .select("-token");
 
         if (users.length === 0) {
-            ApiHelper.generateApiResponse(res, req, "No users found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "No users found",
+                404
+            );
         }
 
         ApiHelper.generateApiResponse(
@@ -77,8 +81,12 @@ router.get("/:id", async (req, res) => {
         });
 
         if (user === null) {
-            ApiHelper.generateApiResponse(res, req, "User not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User not found",
+                404
+            );
         }
 
         ApiHelper.generateApiResponse(res, req, "User found", 200, user);
@@ -95,20 +103,18 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "All fields required.",
                 400
             );
-            return;
         }
 
         const { error, value } = validateUser(req.body);
 
         if (error) {
-            ApiHelper.generateApiResponse(res, req, error.message, 400);
-            return;
+            return ApiHelper.generateApiResponse(res, req, error.message, 400);
         }
 
         const { email, username } = value;
@@ -116,30 +122,32 @@ router.post("/", async (req, res) => {
         const existingEmail = await User.findOne({ email });
 
         if (existingEmail) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with same email already exist",
                 409
             );
-            return;
         }
 
         const existingUsername = await User.findOne({ username });
 
         if (existingUsername) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with same username already exist",
                 409
             );
-            return;
         }
 
         if (!usernameValidator(req.body.username)) {
-            ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Invalid username",
+                400
+            );
         }
 
         let user = await User.create(req.body);
@@ -169,13 +177,12 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Inputs can not be empty.",
                 400
             );
-            return;
         }
 
         const user = await User.findById(req.params.id, {
@@ -184,8 +191,12 @@ router.put("/:id", async (req, res) => {
         });
 
         if (!user) {
-            ApiHelper.generateApiResponse(res, req, "User not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User not found",
+                404
+            );
         }
 
         const fieldNames = [
@@ -210,13 +221,12 @@ router.put("/:id", async (req, res) => {
         }
 
         if (count === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid field name entered",
                 400
             );
-            return;
         }
 
         const existingEmail = await User.findOne({
@@ -224,13 +234,12 @@ router.put("/:id", async (req, res) => {
         });
 
         if (existingEmail) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with the same email already exist.",
                 409
             );
-            return;
         }
 
         const existingUsername = await User.findOne({
@@ -241,43 +250,36 @@ router.put("/:id", async (req, res) => {
         });
 
         if (existingUsername) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with the same username already exist.",
                 409
             );
-            return;
         }
 
-        if (req.body.user_type) {
-            if (
-                req.body.user_type !== "user" ||
-                req.body.user_type !== "admin"
-            ) {
-                ApiHelper.generateApiResponse(
-                    res,
-                    req,
-                    "User type must be either user or admin.",
-                    400
-                );
-                return;
-            }
+        if (
+            req.body.user_type &&
+            (req.body.user_type !== "user" || req.body.user_type !== "admin")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User type must be either user or admin.",
+                400
+            );
         }
 
-        if (req.body.status) {
-            if (
-                req.body.status !== "active" ||
-                req.body.status !== "inactive"
-            ) {
-                ApiHelper.generateApiResponse(
-                    res,
-                    req,
-                    "Status must be either active or inactive.",
-                    400
-                );
-                return;
-            }
+        if (
+            req.body.status &&
+            (req.body.status !== "active" || req.body.status !== "inactive")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Status must be either active or inactive.",
+                400
+            );
         }
 
         if (req.body.password) {
@@ -292,13 +294,12 @@ router.put("/:id", async (req, res) => {
         );
 
         if (!usernameValidator(updatedUser.username)) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid username, shoud not contain space.",
                 400
             );
-            return;
         }
 
         ApiHelper.generateApiResponse(
@@ -320,19 +321,22 @@ router.put("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Inputs can not be empty.",
                 400
             );
-            return;
         }
         const user = await User.findById(req.params.id);
 
         if (!user) {
-            ApiHelper.generateApiResponse(res, req, "User not found", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User not found",
+                404
+            );
         }
 
         const fieldNames = [
@@ -357,13 +361,12 @@ router.patch("/:id", async (req, res) => {
         }
 
         if (count === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid field name entered",
                 400
             );
-            return;
         }
 
         const existingEmail = await User.findOne({
@@ -371,13 +374,12 @@ router.patch("/:id", async (req, res) => {
         });
 
         if (existingEmail) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with the same email already exist.",
                 409
             );
-            return;
         }
 
         const existingUsername = await User.findOne({
@@ -388,13 +390,43 @@ router.patch("/:id", async (req, res) => {
         });
 
         if (existingUsername) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with the same username already exist.",
                 409
             );
+        }
+
+        if (
+            req.body.user_type &&
+            (req.body.user_type !== "user" || req.body.user_type !== "admin")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User type must be either user or admin.",
+                400
+            );
             return;
+        }
+
+        if (
+            req.body.status &&
+            (req.body.status !== "active" || req.body.status !== "inactive")
+        ) {
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Status must be either active or inactive.",
+                400
+            );
+            return;
+        }
+
+        if (req.body.password) {
+            const hashedPassword = bcrypt.hashSync(req.body.password, 10);
+            req.body.password = hashedPassword;
         }
 
         const updatedUser = await User.findByIdAndUpdate(
@@ -404,13 +436,12 @@ router.patch("/:id", async (req, res) => {
         );
 
         if (!usernameValidator(updatedUser.username)) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid username, shoud not contain space.",
                 400
             );
-            return;
         }
 
         ApiHelper.generateApiResponse(
@@ -429,8 +460,12 @@ router.delete("/:id", async (req, res) => {
         const user = await User.findById(req.params.id);
 
         if (!user) {
-            ApiHelper.generateApiResponse(res, req, "User not found.", 404);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "User not found.",
+                404
+            );
         }
 
         const deletedUser = await User.findByIdAndDelete(req.params.id);

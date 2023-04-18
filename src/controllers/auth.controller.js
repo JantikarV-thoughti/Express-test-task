@@ -9,49 +9,50 @@ const { ApiHelper, JwtHelper } = require("../utils");
 router.post("/register", async (req, res) => {
     try {
         if (Object.keys(req.body).length === 0) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "All fields required.",
                 400
             );
-            return;
         }
 
         const { error } = validateUser(req.body);
 
         if (error) {
-            ApiHelper.generateApiResponse(res, req, error.message, 400);
-            return;
+            return ApiHelper.generateApiResponse(res, req, error.message, 400);
         }
 
         const existingUser = await User.findOne({ email: req.body.email });
         if (existingUser) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with same email already exist",
                 409
             );
-            return;
         }
 
         const existingUsername = await User.findOne({
             username: req.body.username,
         });
+
         if (existingUsername) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "User with same username already exist",
                 409
             );
-            return;
         }
 
         if (!usernameValidator(req.body.username)) {
-            ApiHelper.generateApiResponse(res, req, "Invalid username", 400);
-            return;
+            return ApiHelper.generateApiResponse(
+                res,
+                req,
+                "Invalid username",
+                400
+            );
         }
 
         let user = await User.create(req.body);
@@ -85,35 +86,32 @@ router.post("/login", async (req, res) => {
             .select("status");
 
         if (!user) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid email, please enter the correct email.",
                 401
             );
-            return;
         }
 
         const match = user.checkPassword(req.body.password);
 
         if (!match) {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Invalid password, please enter the correct password.",
                 401
             );
-            return;
         }
 
         if (user.status === "inactive") {
-            ApiHelper.generateApiResponse(
+            return ApiHelper.generateApiResponse(
                 res,
                 req,
                 "Inactive user; User disabled",
                 401
             );
-            return;
         }
 
         let payload = { user_id: user._id };
@@ -144,13 +142,12 @@ router.post("/logout", authenticate, async (req, res) => {
             const token = req.headers?.authorization.split(" ")[1];
 
             if (!token) {
-                ApiHelper.generateApiResponse(
+                return ApiHelper.generateApiResponse(
                     res,
                     req,
                     "Authorization fail",
                     401
                 );
-                return;
             }
 
             await User.findByIdAndUpdate(req.user.user_id, {
