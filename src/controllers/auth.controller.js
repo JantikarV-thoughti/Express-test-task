@@ -89,7 +89,7 @@ router.post("/login", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid email, please enter the correct email.",
+                "Invalid credentials, either email or password are wrong.",
                 401
             );
         }
@@ -100,7 +100,7 @@ router.post("/login", async (req, res) => {
             return ApiHelper.generateApiResponse(
                 res,
                 req,
-                "Invalid password, please enter the correct password.",
+                "Invalid credentials, either email or password are wrong.",
                 401
             );
         }
