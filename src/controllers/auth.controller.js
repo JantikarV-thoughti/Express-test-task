@@ -138,28 +138,10 @@ router.post("/login", async (req, res) => {
 
 router.post("/logout", authenticate, async (req, res) => {
     try {
-        if (req.headers && req.headers.authorization) {
-            const token = req.headers?.authorization.split(" ")[1];
-
-            if (!token) {
-                return ApiHelper.generateApiResponse(
-                    res,
-                    req,
-                    "Authorization fail",
-                    401
-                );
-            }
-
-            await User.findByIdAndUpdate(req.user.user_id, {
-                $unset: { token: "" },
-            });
-            ApiHelper.generateApiResponse(
-                res,
-                req,
-                "Logged out successfully",
-                200
-            );
-        }
+        await User.findByIdAndUpdate(req.user.user_id, {
+            $unset: { token: "" },
+        });
+        ApiHelper.generateApiResponse(res, req, "Logged out successfully", 200);
     } catch (error) {
         ApiHelper.generateApiResponse(res, req, "Something went wrong", 500);
     }
