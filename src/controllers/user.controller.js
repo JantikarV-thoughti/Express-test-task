@@ -41,7 +41,7 @@ router.get("/", async (req, res) => {
 
         const users = await User.find(query)
             .select("-password")
-            .select("-tokens");
+            .select("-token");
 
         if (users.length === 0) {
             ApiHelper.generateApiResponse(res, req, "No users found", 404);
@@ -73,7 +73,7 @@ router.get("/:id", async (req, res) => {
     try {
         const user = await User.findById(req.params.id, {
             password: 0,
-            tokens: 0,
+            token: 0,
         });
 
         if (user === null) {
@@ -146,7 +146,7 @@ router.post("/", async (req, res) => {
 
         user = await User.findOne(
             { email: req.body.email },
-            { password: 0, tokens: 0 }
+            { password: 0, token: 0 }
         );
 
         ApiHelper.generateApiResponse(
@@ -180,7 +180,7 @@ router.put("/:id", async (req, res) => {
 
         const user = await User.findById(req.params.id, {
             password: 0,
-            tokens: 0,
+            token: 0,
         });
 
         if (!user) {
